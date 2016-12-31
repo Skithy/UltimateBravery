@@ -24,12 +24,14 @@ module.exports = {
   module: {
     loaders: [{
       test: path.join(__dirname, 'src'),
-      loader: ['babel-loader'],
+      loader: "babel-loader",
       query: {
         cacheDirectory: 'babel_cache',
         presets: debug ? ['react', 'es2015', 'react-hmre'] : ['react', 'es2015']
       }
-    }]
+    },
+      { test: /\.less$/, loader: "style!css!less" }
+    ]
   },
   plugins: debug ? [] : [
     new webpack.DefinePlugin({

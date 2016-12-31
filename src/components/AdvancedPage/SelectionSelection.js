@@ -8,7 +8,7 @@ import Subheader from 'material-ui/Subheader'
 import NumericInput from 'react-numeric-input'
 
 
-export default class DiceSelector extends React.Component {
+export default class SelectionSection extends React.Component {
 
   constructor(props) {
     super(props)
@@ -23,15 +23,6 @@ export default class DiceSelector extends React.Component {
   render () {
     return (
       <Card expanded={this.state.expanded} onExpandChange={this.toggleExpand} style={{margin:10}}>
-        <Subheader>Coin Flip</Subheader>
-        <CardText>
-          <DiceOption type="coin" index={0}
-            values={this.props.values}
-            updateValue={this.props.updateValue}/>
-        </CardText>
-        
-        <Divider />
-        <Subheader>Dice Roll</Subheader>
         <CardText expandable={true}>
           <DiceOption type="dice-d4" index={1}
             values={this.props.values}
