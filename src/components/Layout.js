@@ -58,13 +58,14 @@ const DrawerSection = props => (
               onTouchTap={props.toggleExpand}>
       Dice Roll
     </MenuItem>
-    <MenuItem containerElement={<Link to="/advanced"/>}
-              onTouchTap={props.toggleExpand}
-              disabled={true}>
-      Advanced Dice *WIP*
-    </MenuItem>
   </Drawer>
 )
+
+// <MenuItem containerElement={<Link to="/advanced"/>}
+//              onTouchTap={props.toggleExpand}
+//              disabled={true}>
+//      Advanced Dice *WIP*
+// </MenuItem>
 
 const getAppTitle = route => {
   switch(route) {
