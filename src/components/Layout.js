@@ -59,8 +59,9 @@ const DrawerSection = props => (
       Dice Roll
     </MenuItem>
     <MenuItem containerElement={<Link to="/advanced"/>}
-              onTouchTap={props.toggleExpand}>
-      Advanced Dice
+              onTouchTap={props.toggleExpand}
+              disabled={true}>
+      Advanced Dice *WIP*
     </MenuItem>
   </Drawer>
 )
