@@ -2,12 +2,13 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppRoutes from './components/AppRoutes'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const App = () => (
-  <MuiThemeProvider>
+  <MuiThemeProvider muiTheme={getMuiTheme()}>
     <AppRoutes />
   </MuiThemeProvider>
 )

@@ -8,6 +8,9 @@ import DicePage from './components/DicePage/DicePage'
 import AdvancedPage from './components/AdvancedPage/AdvancedPage'
 import NotFoundPage from './components/NotFoundPage'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+
 const routes = (
   <Route path="/" component={LayoutR}>
     <IndexRoute component={DicePage}/>
@@ -17,5 +20,10 @@ const routes = (
     <Route path="*" component={NotFoundPage}/>
   </Route>
 )
+
+window.onload = () => {
+  injectTapEventPlugin()
+  ReactDOM.render(<App/>, document.getElementById('main'))
+}
 
 export default routes
