@@ -3,14 +3,14 @@
 import React from 'react'
 import DiceSection from './DiceSection'
 import LogSection from '../SharedComponents/LogSection'
-import {getRandomInt, createArray, getUpdatedDict} from '../SharedComponents/SharedElements'
+import {getRandomInt, createArray} from '../SharedComponents/SharedElements'
 
 
 export default class DicePage extends React.Component {
   constructor() {
     super()
     this.state = {
-      values: {"6": [1]},
+      dice: [1],
       log: []
     }
     this.updateValues = this.updateValues.bind(this)
@@ -21,17 +21,15 @@ export default class DicePage extends React.Component {
   updateValues(e) {
     // e is the number of dice
     const tempArray = createArray(e, () => 1)
-    this.setState({values: getUpdatedDict(this.state.values, "6", tempArray)}) 
+    this.setState({dice: tempArray}) 
   }
 
   generateValues() {
-    let allResults = {}
-    for (const key in this.state.values) {
-      allResults[key] = createArray(this.state.values[key].length, () => getRandomInt(1, 6))
-    }
+    const tempArray = createArray(this.state.dice.length, () => getRandomInt(1, 6))
+    let logFormat = {6: tempArray}
     this.setState({
-      values: allResults,
-      log: this.state.log.concat(allResults)
+      dice: tempArray,
+      log: this.state.log.concat([logFormat])
     })
   }
 
@@ -41,9 +39,9 @@ export default class DicePage extends React.Component {
 
   render() {
     return (
-      <div className="home" id="dicePage" style={{marginLeft:20, marginRight:20}}>
+      <div className="home" id="dicePage">
         <DiceSection
-          dice={this.state.values["6"]}
+          dice={this.state.dice}
           updateValues={this.updateValues}
           generateValues={this.generateValues}
         />

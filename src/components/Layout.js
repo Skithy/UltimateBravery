@@ -69,7 +69,7 @@ const getAppTitle = route => {
   switch(route) {
     case "/coin": return "Coin Flip"
     case "/dice": case "/": return "Dice Roll"
-    case "/advanced": return "Advanced Dice"
+    case "/advanced": return "Advanced Dice *WIP*"
   }
 }
 

@@ -8,6 +8,8 @@ import Subheader from 'material-ui/Subheader'
 import FlatButton from 'material-ui/FlatButton'
 
 import {getLastItem} from '../SharedComponents/SharedElements'
+import {cyan500} from 'material-ui/styles/colors'
+
 
 export default class LogSection extends React.Component { 
   constructor(props) {
@@ -16,25 +18,37 @@ export default class LogSection extends React.Component {
     this.toggleExpand = this.toggleExpand.bind(this)
   }
 
+  componentDidUpdate() {
+    const obj = this.refs.scroll
+    obj.scrollTop = obj.scrollHeight
+  }
+
   toggleExpand() {
     this.setState({expanded: !this.state.expanded})
   }
 
   render() {
-    const rows = this.props.log.map((results, index) => <LogRow results={results} key={index}/>)
+    const rows = this.props.log.map((results, index) =>
+      <LogRow results={results} key={index} style={{padding:10}}
+        primary={index == this.props.log.length - 1 ? true : false}
+      />
+    )
+
     return (
       <Paper className="view-card">
         <Subheader>Results</Subheader>
 
-        <div id="log" style={{padding:10}}>
+        <div id="log" className="scroll-display" ref="scroll">
             {this.props.log.length > 0 ?
               (this.state.expanded ?
-                rows : <LogRow primary={true} results={getLastItem(this.props.log)}/>
+                rows : <LogRow results={getLastItem(this.props.log)}
+                         primary={true} style={{padding:10}}
+                       />
               ) : null
             }
         </div>
 
-        <div id="buttons" style={{padding:10}}>
+        <div id="buttons">
           <FlatButton label={this.state.expanded ? "Hide Log" : "Show Log"} onTouchTap={this.toggleExpand} />
           <FlatButton label="Clear Log" onTouchTap={this.props.clearLog} />
         </div>
@@ -43,30 +57,25 @@ export default class LogSection extends React.Component {
   }
 }
 
-const LogRow = props => {
-  const keys = Object.keys(props.results).sort((a, b) => (a-b))
+const LogRow = ({results, primary}) => {
+  const keys = Object.keys(results).sort((a, b) => (a-b))
   const lines = keys.map((key, index) =>
-    (props.results[key].length > 0 ? <LogLine sides={key} values={props.results[key]} key={index}/> : null)
+    (results[key].length > 0 ?
+      <LogLine sides={key} values={results[key]} key={index}/> : null
+    )
   )
+  const primaryTheme = {backgroundColor: cyan500, color: "white", margin:10, padding:10}
+  const normalTheme = {margin:10, padding:10}
   return(
-    <Paper style={{margin:10}}>
+    <Paper style={primary ? primaryTheme : normalTheme}>
       {lines}
     </Paper>
   )
 }
 
-const LogLine = props => (
+const LogLine = ({sides, values}) => (
   <p>
-    {props.values.length}d{props.sides}: {props.values.join(" + ")} = {props.values.reduce((a, b) => a + b, 0)}
+    {values.length + "d" + sides + ": " + values.join(" + ") +
+     " = " + values.reduce((a, b) => a + b, 0)}
   </p>
 )
-
-const getDiceIcon = index => {
-  switch(index) {
-    case 0: return "coin"
-    case 1: return "dice-d4"
-    case 2: return "dice-d6"
-    case 3: return "dice-d8"
-    case 4: return "dice-d20"
-  }
-}

@@ -7,31 +7,31 @@ import FontIcon from 'material-ui/FontIcon'
 import NumericInput from 'react-numeric-input'
 
 
-const DiceSection = props => (
+const DiceSection = ({dice, updateValues, generateValues}) => (
   <Paper className="view-card">
-    <div id="options" style={{padding:10}}>
+    <div id="options">
       <span>Dice: </span>
       <NumericInput
           min={1} max={9}
-          value={props.dice.length}
-          onChange={props.updateValues}
+          value={dice.length}
+          onChange={updateValues}
           maxLength={1}
       />
     </div>
 
-    <DisplayDice dice={props.dice}/>
+    <DisplayDice dice={dice}/>
 
-    <div id="buttons" style={{padding:10}}>
-      <RaisedButton label="Roll Dice" primary={true} onClick={props.generateValues}/>
+    <div id="buttons">
+      <RaisedButton label="Roll Dice" primary={true} onClick={generateValues}/>
     </div>
   </Paper>
 )
 
 
-const DisplayDice = props => (
-  <div style={{padding: 10, display:"flex", flexWrap:"wrap"}}>
-    {props.dice.map((value, index) =>
-      <FontIcon className={"mdi mdi-dice-" + value} style={{fontSize:"9em", margin:"auto", display:"flex"}} key={index}/>
+const DisplayDice = ({dice}) => (
+  <div style={{display:"flex", flexWrap:"wrap"}}>
+    {dice.map((value, index) =>
+      <FontIcon className={"mdi mdi-dice-" + value} style={{fontSize:"10em", margin:"auto", display:"flex"}} key={index}/>
     )}
   </div>
 )

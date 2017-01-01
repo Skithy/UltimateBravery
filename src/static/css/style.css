@@ -25,3 +25,43 @@ a {
   margin: auto;
   margin-top: 20px;
 }
+
+.scroll-display {
+  max-height: 250px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.home {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.primary {
+  background-color: #00BCD4;
+  color: #000000;
+}
+
+.secondary {
+  background-color: #673AB7;
+  color: #000000;
+}
+
+.coin {
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
+.coin > div {
+  margin: auto;
+  font-size: 3em;
+}
+
+.view-card {
+  padding: 10px;
+}
