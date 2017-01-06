@@ -2,14 +2,11 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import AppRoutes from './components/AppRoutes'
-import injectTapEventPlugin from 'react-tap-event-plugin'
+import { Router, browserHistory } from 'react-router'
+import routes from './routes'
 
-const App = () => (
-    <AppRoutes />
-)
+const App = <Router history={browserHistory} routes={routes} onUpdate={() => window.scrollTo(0, 0)}/>
 
 window.onload = () => {
-  injectTapEventPlugin()
-  ReactDOM.render(<App/>, document.getElementById('main'))
+  ReactDOM.render(App, document.getElementById('main'))
 }
