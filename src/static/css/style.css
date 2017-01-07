@@ -1,81 +1,67 @@
-/*
-cyan      #18BC9C
-darkblue  #2C3E50
-yellow    #F39C12
-orange    #E74C3C
-blue      #3498DB
-*/
+/*! CSS reset from benfrain/app-reset */
+*,:after,:before{box-sizing:inherit}html{box-sizing:border-box}
+*{user-select:none;-webkit-tap-highlight-color:rgba(255,255,255,0);-webkit-tap-highlight-color:transparent}
+[contenteditable],input[type]{user-select:text}body,h1,h2,h3,h4,h5,h6,p{margin:0;font-size:1rem;font-weight:400}
+a{text-decoration:none;color:inherit}b{font-weight:400}em,i{font-style:normal}a:focus,input:focus{outline:0}
+fieldset,input{appearance:none;border:0;padding:0;margin:0;min-width:0;font-size:1rem;font-family:inherit}
+input::-ms-clear{display:none}input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{appearance:none}
+svg{display:inline-flex}img{max-width:100%;display:block}
 
+html {
+  color: #030303;
+  font: caption;
+  padding-bottom: 2em;
+}
 
 a {
   color: #1f4ba0;
   text-decoration: underline;
 }
 
-div.home {
-  min-width: 300px;
-  padding: 20px;
-  padding-top: 62px;
-  background-color: #ecf0f1;
-}
-
-
-div.rounded-block {
-  border-radius: 4px;
-  border: solid 2px #c7c3c3;
-  padding-top: 5px;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-bottom: 25px;
-  background-color: white;
-  max-width: 800px;
+.view-card {
+  min-width: 200px;
+  max-width: 600px;
   margin: auto;
   margin-top: 20px;
-
 }
 
-div.display {
-  border-radius: 4px;
-  border: solid 2px #e5e5e5;
-  background-color: #ecf0f1;
-  margin-bottom: 20px;
-}
-
-div.display.display-coin {
-  padding: 30px;
-}
-
-div.display.display-dice {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0px;
-}
-
-div.display.display-scroll {
+.scroll-display {
+  max-height: 250px;
+  overflow: scroll;
+  overflow-x: hidden;
   overflow-y: auto;
-  max-height: 300px;
 }
 
-div.coin {
-  border-radius: 50%;
-  height: 300px;
-  width: 300px;
-  margin: auto;
+.home {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.primary {
+  background-color: #00BCD4;
+  color: #000000;
+}
+
+.secondary {
+  background-color: #673AB7;
+  color: #000000;
+}
+
+.coin {
+  width: 200px;
+  height: 200px;
+  text-align: center;
   display: flex;
-}
-
-div.coin.coin-heads {
-  background-color: #18BC9C;
-  border: solid 2px #15a589;
-}
-
-div.coin.coin-tails {
-  background-color: #F39C12;
-  border: solid 2px #c87f0a;
-}
-
-div.coin.coin-heads > h1,
-div.coin.coin-tails > h1 {
-  color: #2C3E50;
+  align-items: center;
   margin: auto;
+}
+
+.coin > div {
+  margin: auto;
+  font-size: 3em;
+}
+
+.view-card {
+  padding: 10px;
 }

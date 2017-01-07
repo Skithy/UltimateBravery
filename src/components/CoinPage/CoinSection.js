@@ -1,32 +1,35 @@
 'use strict'
 
 import React from 'react'
-import Button from 'react-bootstrap/lib/Button'
+import Paper from 'material-ui/Paper'
+import RaisedButton from 'material-ui/RaisedButton'
+
+import {cyan500, pink500} from 'material-ui/styles/colors'
+
 
 const CoinSection = ({coin, flipCoin}) => (
-  <div>
-    <div id="description">
-      <h1>Coin Flip</h1>
-      <p>Click on the coin or button to flip the coin.</p>
-    </div>
-    <div className="display display-coin">
-      <div className={diceClass(coin)} onClick={flipCoin}>
-        <h1>{diceText(coin)}</h1>
+  <Paper className="view-card">
+    <Paper className="coin" style={coin ? heads : tails} circle={true}>
+      <div>
+        {coin ? "Heads" : "Tails"}
       </div>
-    </div>
+    </Paper>
     <div id="buttons">
-      <Button bsStyle="primary" onClick={flipCoin}>Flip Coin</Button>
+      <RaisedButton label="Flip Coin" primary={true} onClick={flipCoin}/>
     </div>
-  </div>
+  </Paper>
 )
 
+// Styles
+const heads = {
+  backgroundColor: cyan500,
+  color: "white"
+};
+
+const tails = {
+  backgroundColor: pink500,
+  color: "white"
+};
+
+
 export default CoinSection
-
-      // <Transition
-      //   timeout={1000}
-      //   enteredClassName='in'
-      //   enteringClassName='in'
-      // >
-
-const diceClass = coin => "coin coin-" + (coin ? "heads" : "tails")
-const diceText = coin => coin ? "HEADS" : "TAILS"

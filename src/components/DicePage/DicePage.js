@@ -18,8 +18,9 @@ export default class DicePage extends React.Component {
     this.clearLog = this.clearLog.bind(this)
   }
 
-  updateValues(num) {
-    const tempArray = createArray(num, () => 1)
+  updateValues(e) {
+    // e is the number of dice
+    const tempArray = createArray(e, () => 1)
     this.setState({dice: tempArray}) 
   }
 
@@ -38,21 +39,17 @@ export default class DicePage extends React.Component {
 
   render() {
     return (
-      <div id="dicePage">
-        <div className="rounded-block">
-          <DiceSection
-            dice={this.state.dice}
-            updateValues={this.updateValues}
-            generateValues={this.generateValues}
-          />
-        </div>
-        <div className="rounded-block">
-          <LogSection
-            log={this.state.log}
-            clearLog={this.clearLog}
-          />
-        </div>
-      </div>
+      <div className="home" id="dicePage">
+        <DiceSection
+          dice={this.state.dice}
+          updateValues={this.updateValues}
+          generateValues={this.generateValues}
+        />
+        <LogSection
+          log={this.state.log}
+          clearLog={this.clearLog}
+        />
+      </div>  
     )
   }
 }

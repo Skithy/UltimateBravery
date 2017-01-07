@@ -1,8 +1,14 @@
 'use strict'
 
 import React from 'react'
-import Button from 'react-bootstrap/lib/Button'
+import {Card, CardActions, CardText} from 'material-ui/Card'
+import Paper from 'material-ui/Paper'
+import Divider from 'material-ui/Divider'
+import Subheader from 'material-ui/Subheader'
+import FlatButton from 'material-ui/FlatButton'
+
 import {getLastItem} from '../SharedComponents/SharedElements'
+import {cyan500} from 'material-ui/styles/colors'
 
 
 export default class LogSection extends React.Component { 
@@ -23,28 +29,30 @@ export default class LogSection extends React.Component {
 
   render() {
     const rows = this.props.log.map((results, index) =>
-      <LogRow results={results} key={index}
+      <LogRow results={results} key={index} style={{padding:10}}
         primary={index == this.props.log.length - 1 ? true : false}
       />
     )
 
     return (
-      <div>
-        <h2>Results</h2>
+      <Paper className="view-card">
+        <Subheader>Results</Subheader>
 
-        <div id="log" className="display display-scroll" ref="scroll">
-            {this.props.log.length > 0 ? 
-              (this.state.expanded ? rows :
-                <LogRow results={getLastItem(this.props.log)} primary={true}/>
-              ) : <p>Empty</p>
+        <div id="log" className="scroll-display" ref="scroll">
+            {this.props.log.length > 0 ?
+              (this.state.expanded ?
+                rows : <LogRow results={getLastItem(this.props.log)}
+                         primary={true} style={{padding:10}}
+                       />
+              ) : null
             }
         </div>
 
         <div id="buttons">
-          <Button bsStyle="primary" style={{marginRight:20}} onClick={this.toggleExpand}>{this.state.expanded ? "Hide Log" : "Show Log"}</Button>
-          <Button bsStyle="primary" onClick={this.props.clearLog}>Clear Log</Button>
+          <FlatButton label={this.state.expanded ? "Hide Log" : "Show Log"} onTouchTap={this.toggleExpand} />
+          <FlatButton label="Clear Log" onTouchTap={this.props.clearLog} />
         </div>
-      </div>
+      </Paper>
     )
   }
 }
@@ -56,12 +64,12 @@ const LogRow = ({results, primary}) => {
       <LogLine sides={key} values={results[key]} key={index}/> : null
     )
   )
-  const primaryTheme = {backgroundColor:"white"}
-  const normalTheme = {backgroundColor:"red"}
+  const primaryTheme = {backgroundColor: cyan500, color: "white", margin:10, padding:10}
+  const normalTheme = {margin:10, padding:10}
   return(
-    <div style={primary ? primaryTheme : normalTheme}>
+    <Paper style={primary ? primaryTheme : normalTheme}>
       {lines}
-    </div>
+    </Paper>
   )
 }
 
