@@ -24,7 +24,7 @@ export default class LogSection extends React.Component {
   render() {
     const rows = this.props.log.map((results, index) =>
       <LogRow results={results} key={index}
-        primary={index == this.props.log.length - 1 ? true : false}
+        styleType={index == this.props.log.length - 1 ? "primary" : "secondary"}
       />
     )
 
@@ -34,8 +34,8 @@ export default class LogSection extends React.Component {
 
         <div id="log" className="display display-scroll" ref="scroll">
             {this.props.log.length > 0 ? 
-              (this.state.expanded ? rows :
-                <LogRow results={getLastItem(this.props.log)} primary={true}/>
+              (this.state.expanded & this.props.log.length > 1 ? rows :
+                <LogRow results={getLastItem(this.props.log)} styleType="solo"/>
               ) : <p>Empty</p>
             }
         </div>
@@ -49,20 +49,26 @@ export default class LogSection extends React.Component {
   }
 }
 
-const LogRow = ({results, primary}) => {
+const LogRow = ({results, styleType}) => {
   const keys = Object.keys(results).sort((a, b) => (a-b))
   const lines = keys.map((key, index) =>
     (results[key].length > 0 ?
       <LogLine sides={key} values={results[key]} key={index}/> : null
     )
   )
-  const primaryTheme = {backgroundColor:"white"}
-  const normalTheme = {backgroundColor:"red"}
   return(
-    <div style={primary ? primaryTheme : normalTheme}>
+    <div className={getStyle(styleType)}>
       {lines}
     </div>
   )
+}
+
+const getStyle = style => {
+  switch(style) {
+    case "primary": return "log log-primary"
+    case "secondary": return "log log-secondary"
+    case "solo": return "log log-primary solo"
+  }
 }
 
 const LogLine = ({sides, values}) => (
