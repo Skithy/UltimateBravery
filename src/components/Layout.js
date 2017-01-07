@@ -10,7 +10,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 class Layout extends React.Component {
   constructor () {
     super()
-    this.state = {expanded: false}
+    this.state = {expanded: true}
     this.toggleExpand = this.toggleExpand.bind(this)
     this.navigateToHome = this.navigateToHome.bind(this)
   }
@@ -29,9 +29,6 @@ class Layout extends React.Component {
     return (
       <MuiThemeProvider>
         <div className="app-container">
-          <AppBar title={getAppTitle(currentLocation)}
-                  onLeftIconButtonTouchTap={this.toggleExpand}/>
-
           <DrawerSection expanded={this.state.expanded}
                          toggleExpand={this.toggleExpand}
                          navigateToHome={this.navigateToHome}/>
@@ -45,13 +42,17 @@ class Layout extends React.Component {
   }
 }
 
+//          <AppBar title={getAppTitle(currentLocation)}
+//                  onLeftIconButtonTouchTap={this.toggleExpand}/>
+//     <AppBar title="DiceRoll.Online"
+//            onLeftIconButtonTouchTap={props.toggleExpand}
+//            onTitleTouchTap={props.navigateToHome}/>
+
+
 const DrawerSection = props => (
   <Drawer docked={false}
           onRequestChange={props.toggleExpand}
           open={props.expanded}>
-    <AppBar title="DiceRoll.Online"
-            onLeftIconButtonTouchTap={props.toggleExpand}
-            onTitleTouchTap={props.navigateToHome}/>
     <MenuItem containerElement={<Link to="/coin"/>}
               onTouchTap={props.toggleExpand}>
       Coin Flip
