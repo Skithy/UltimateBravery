@@ -5,7 +5,6 @@ import { Link, withRouter } from 'react-router'
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
-import FontIcon from 'material-ui/FontIcon'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 class Layout extends React.Component {

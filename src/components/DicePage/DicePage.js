@@ -4,7 +4,7 @@ import React from 'react'
 import DiceSection from './DiceSection'
 import LogSection from '../SharedComponents/LogSection'
 import {getRandomInt, createArray} from '../SharedComponents/SharedElements'
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 export default class DicePage extends React.Component {
   constructor() {
@@ -39,6 +39,7 @@ export default class DicePage extends React.Component {
 
   render() {
     return (
+      <MuiThemeProvider>
       <div className="home" id="dicePage">
         <DiceSection
           dice={this.state.dice}
@@ -49,7 +50,8 @@ export default class DicePage extends React.Component {
           log={this.state.log}
           clearLog={this.clearLog}
         />
-      </div>  
+      </div>
+      </MuiThemeProvider>
     )
   }
 }
