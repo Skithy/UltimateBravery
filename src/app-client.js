@@ -13,7 +13,5 @@ const App = () => (
   </MuiThemeProvider>
 )
 
-window.onload = () => {
-  injectTapEventPlugin()
-  ReactDOM.render(<App/>, document.getElementById('main'))
-}
+injectTapEventPlugin()
+ReactDOM.render(<App/>, document.getElementById('main'))
