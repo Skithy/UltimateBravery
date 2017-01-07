@@ -6,6 +6,9 @@ import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import FontIcon from 'material-ui/FontIcon'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+
 
 class Layout extends React.Component {
   constructor () {
@@ -27,6 +30,7 @@ class Layout extends React.Component {
   render() {
     var currentLocation = this.props.location.pathname
     return (
+      <MuiThemeProvider muiTheme={getMuiTheme}>
       <div className="app-container">
         <AppBar title={getAppTitle(currentLocation)}
                 onLeftIconButtonTouchTap={this.toggleExpand}/>
@@ -39,6 +43,7 @@ class Layout extends React.Component {
           {this.props.children}
         </div>
       </div>
+      </MuiThemeProvider>
     )
   }
 }
