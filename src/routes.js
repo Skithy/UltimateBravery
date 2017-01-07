@@ -21,9 +21,4 @@ const routes = (
   </Route>
 )
 
-window.onload = () => {
-  injectTapEventPlugin()
-  ReactDOM.render(<App/>, document.getElementById('main'))
-}
-
 export default routes
