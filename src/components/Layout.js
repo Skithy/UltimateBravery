@@ -29,14 +29,9 @@ const NavbarSection = () => (
         <LinkContainer to="/coin">
           <NavItem eventKey={1}>Coin</NavItem>
         </LinkContainer>
-        <NavDropdown eventKey={2} title="Dice" id="dice-nav-dropdown">
-          <LinkContainer to="/dice">
-            <MenuItem eventKey={2.1}>Simple</MenuItem>
-          </LinkContainer>
-          <LinkContainer to="/advanced">
-            <MenuItem eventKey={2.2}>Advanced</MenuItem>
-          </LinkContainer>
-        </NavDropdown>
+        <LinkContainer to="/dice">
+          <NavItem eventKey={2}>Dice</NavItem>
+        </LinkContainer>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
@@ -45,3 +40,13 @@ const NavbarSection = () => (
 const LayoutR = withRouter(Layout)
 
 export default LayoutR
+
+        // <NavDropdown eventKey={2} title="Dice" id="dice-nav-dropdown">
+        //   <LinkContainer to="/dice">
+        //     <MenuItem eventKey={2.1}>Simple</MenuItem>
+        //   </LinkContainer>
+//        </NavDropdown>
+
+// <LinkContainer to="/advanced">
+//   <MenuItem eventKey={2.2} disabled={true}>Advanced</MenuItem>
+// </LinkContainer>
