@@ -17,11 +17,13 @@ export default class CoinPage extends React.Component {
 
   render() {
     return (
-      <div className="home" id="coinPage">
-        <CoinSection
-          coin={this.state.coin}
-          flipCoin={this.flipCoin}
-        />
+      <div id="coinPage">
+        <div className="rounded-block">
+          <CoinSection
+            coin={this.state.coin}
+            flipCoin={this.flipCoin}
+          />
+        </div>
       </div>  
     )
   }

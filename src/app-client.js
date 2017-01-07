@@ -2,15 +2,11 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import AppRoutes from './components/AppRoutes'
-import injectTapEventPlugin from 'react-tap-event-plugin'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { Router, browserHistory } from 'react-router'
+import routes from './routes'
 
-const App = () => (
-  <MuiThemeProvider>
-    <AppRoutes />
-  </MuiThemeProvider>
-)
+const App = <Router history={browserHistory} routes={routes} onUpdate={() => window.scrollTo(0, 0)}/>
 
-injectTapEventPlugin()
-ReactDOM.render(<App/>, document.getElementById('main'))
+window.onload = () => {
+  ReactDOM.render(App, document.getElementById('main'))
+}

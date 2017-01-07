@@ -4,7 +4,7 @@ import React from 'react'
 import DiceSection from './DiceSection'
 import LogSection from '../SharedComponents/LogSection'
 import {getRandomInt, createArray} from '../SharedComponents/SharedElements'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 
 export default class DicePage extends React.Component {
   constructor() {
@@ -18,9 +18,8 @@ export default class DicePage extends React.Component {
     this.clearLog = this.clearLog.bind(this)
   }
 
-  updateValues(e) {
-    // e is the number of dice
-    const tempArray = createArray(e, () => 1)
+  updateValues(num) {
+    const tempArray = createArray(num, () => 1)
     this.setState({dice: tempArray}) 
   }
 
@@ -39,19 +38,21 @@ export default class DicePage extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-      <div className="home" id="dicePage">
-        <DiceSection
-          dice={this.state.dice}
-          updateValues={this.updateValues}
-          generateValues={this.generateValues}
-        />
-        <LogSection
-          log={this.state.log}
-          clearLog={this.clearLog}
-        />
+      <div id="dicePage">
+        <div className="rounded-block">
+          <DiceSection
+            dice={this.state.dice}
+            updateValues={this.updateValues}
+            generateValues={this.generateValues}
+          />
+        </div>
+        <div className="rounded-block">
+          <LogSection
+            log={this.state.log}
+            clearLog={this.clearLog}
+          />
+        </div>
       </div>
-      </MuiThemeProvider>
     )
   }
 }

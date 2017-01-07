@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-import SelectionSelection from './SelectionSection'
+// import SelectionSelection from './SelectionSection'
 import LogSection from '../SharedComponents/LogSection'
 import {getRandomInt, getUpdatedDict, createArray} from '../SharedComponents/SharedElements'
 
@@ -64,19 +64,21 @@ export default class AdvancedPage extends React.Component {
 
   render() {
     return (
-      <div className="home" id="dicePage">
-        <SelectionSelection
-          values={this.state.values}
-          updateValues={this.updateValues}
-          generateValues={this.generateValues}
-          clearValues={this.clearValues}
-          validateInput={this.validateInput}
-        />
-        <LogSection
-          log={this.state.log}
-          clearLog={this.clearLog}
-        />
-      </div>
+      null
     )
   }
 }
+
+      // <div className="home" id="dicePage">
+      //   <SelectionSelection
+      //     values={this.state.values}
+      //     updateValues={this.updateValues}
+      //     generateValues={this.generateValues}
+      //     clearValues={this.clearValues}
+      //     validateInput={this.validateInput}
+      //   />
+      //   <LogSection
+      //     log={this.state.log}
+      //     clearLog={this.clearLog}
+      //   />
+      // </div>
