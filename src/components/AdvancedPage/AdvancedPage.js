@@ -1,84 +1,112 @@
 'use strict'
 
 import React from 'react'
-// import SelectionSelection from './SelectionSection'
+import SelectorSection from './SelectorSection'
 import LogSection from '../SharedComponents/LogSection'
-import {getRandomInt, getUpdatedDict, createArray} from '../SharedComponents/SharedElements'
+import {getRandomInt, createArray, clone} from '../SharedComponents/SharedElements'
 
+const defaultState = {
+  4:0,
+  6:0,
+  8:0,
+  10:0,
+  12:0,
+  20:0
+}
 
 export default class AdvancedPage extends React.Component {
   constructor() {
     super()
     this.state = {
-      values: {},
-      log: []
+      values: defaultState,
+      log: [],
+      searchText: "",
     }
-    this.updateValues = this.updateValues.bind(this)
-    this.generateValues = this.generateValues.bind(this)
-    this.clearValues = this.clearValues.bind(this)
-    this.clearLog = this.clearLog.bind(this)
-    this.validateInput = this.validateInput.bind(this)
   }
 
-  updateValues(key) {
+
+  updateValues = key => {
     return (e) => {
-      var tempArray = createArray(e, () => 1)
-      this.setState({values: getUpdatedDict(this.state.values, key, tempArray)}) 
+      var values = clone(this.state.values)
+      values[key] = e
+
+      const keys = Object.keys(values).filter(key => values[key] > 0).sort((a, b) => (a-b))
+      const diceStrings = keys.map(key => values[key].toString() + "d" + key.toString())
+      const searchText = diceStrings.join(" ")
+
+      this.setState({values: values, searchText: searchText})
+
     }
   }
 
-  generateValues() {
+  generateValues = () => {
       let allResults = {}
       for (const key in this.state.values) {
-        allResults[key] = createArray(this.state.values[key].length, () => getRandomInt(1, 6))
+        if (key) {
+          allResults[key] = createArray(this.state.values[key], () => getRandomInt(1, key))
+        }
       }
       this.setState({
-        values: allResults,
-        log: this.state.log.concat(allResults)
+        log: this.state.log.concat([allResults])
       })
     }
 
-  clearValues() {
-    this.setState({values: createArray(5, () => [])})
+  clearValues = () => {
+    this.setState({
+      values: defaultState
+    })
   }
 
-  clearLog() {
+  clearLog = () => {
     this.setState({log: []})
   }
 
-  validateInput(e) {
+  updateSearch = e => {
     const text = e.target.value
+    this.setState({searchText: text})
+    this.validateInput(text)
+  }
+
+  validateInput = text => {
     const searchRegExp = /[0-9]{0,2}d[0-9]{1,3}/ig
     const matches = text.match(searchRegExp)
-    const newValues = {}
+    let values = clone(defaultState)
     if (matches) {
       for (var index in matches) {
         let result = matches[index].toLowerCase()
         if (result[0] == "d") {result = "1" + result}
         var [number, sides] = result.split("d")
-        newValues[parseInt(sides)] = createArray(parseInt(number), () => 1)
+        values[parseInt(sides)] = parseInt(number)
       }
-      this.setState({values: newValues})
+      this.setState({values: values})
+    } else {
+      this.setState({values: defaultState})
     }
   }
 
   render() {
     return (
-      null
+      <div id="dicePage">
+        <div className="rounded-block">
+          <SelectorSection
+            values={this.state.values}
+            updateValues={this.updateValues}
+            generateValues={this.generateValues}
+            clearValues={this.clearValues}
+            searchText={this.state.searchText}
+            updateSearch={this.updateSearch}
+            validationState={this.state.validationState}
+          />
+        </div>
+        <div className="rounded-block">
+          <LogSection
+            log={this.state.log}
+            clearLog={this.clearLog}
+          />
+        </div>
+      </div>
     )
   }
 }
 
-      // <div className="home" id="dicePage">
-      //   <SelectionSelection
-      //     values={this.state.values}
-      //     updateValues={this.updateValues}
-      //     generateValues={this.generateValues}
-      //     clearValues={this.clearValues}
-      //     validateInput={this.validateInput}
-      //   />
-      //   <LogSection
-      //     log={this.state.log}
-      //     clearLog={this.clearLog}
-      //   />
-      // </div>
+      

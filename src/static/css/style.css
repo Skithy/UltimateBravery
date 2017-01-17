@@ -25,6 +25,14 @@ a {
   text-decoration: underline;
 }
 
+html {
+  height: 100vh;
+}
+
+body {
+  min-height: 100vh;
+}
+
 div.home {
   min-width: 300px;
   padding: 20px;

@@ -21,37 +21,44 @@ const getLastItem = arr => (
   arr[arr.length - 1]
 )
 
-// returns array with updated index
-const getUpdatedArray = (arr, index, value) => {
-  let tempArr = clone(arr)
-  tempArr[index] = value
-  return tempArr
-}
-
+// creates an array based off function
 const createArray = (length, func) => (
   Array.apply(null, Array(length)).map(func)
 )
 
-const getUpdatedDict = (dict, key, value) => {
-  let tempDict = clone(dict)
-  tempDict[key] = value
-  return tempDict
-}
+// clones an object
+const clone = obj => {
+    var copy;
 
-const clone = (obj) => {
-  if(obj == null || typeof(obj) != 'object')
-      return obj;
+    if (null == obj || "object" != typeof obj) return obj;
 
-  var temp = new obj.constructor(); 
-  for(var key in obj)
-      temp[key] = clone(obj[key]);
+    if (obj instanceof Date) {
+        copy = new Date();
+        copy.setTime(obj.getTime());
+        return copy;
+    }
 
-  return temp;
+    if (obj instanceof Array) {
+        copy = [];
+        for (var i = 0, len = obj.length; i < len; i++) {
+            copy[i] = clone(obj[i]);
+        }
+        return copy;
+    }
+
+    if (obj instanceof Object) {
+        copy = {};
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+        }
+        return copy;
+    }
+
+    throw new Error("Unable to copy obj! Its type isn't supported.");
 }
 
 export {getRandomInt,
         getLastItem,
         getResults,
-        getUpdatedArray,
         createArray,
-        getUpdatedDict}
+        clone}

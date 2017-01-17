@@ -13,7 +13,7 @@ const routes = (
     <IndexRoute component={DicePage}/>
     <Route path="/coin" component={CoinPage}/>
     <Route path="/dice" component={DicePage}/>  
-    <Route path="/advanced" component={NotFoundPage}/>
+    <Route path="/advanced" component={AdvancedPage}/>
     <Route path="*" component={NotFoundPage}/>
   </Route>
 )

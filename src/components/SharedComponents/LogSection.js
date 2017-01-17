@@ -9,7 +9,6 @@ export default class LogSection extends React.Component {
   constructor(props) {
     super(props)
     this.state = {expanded: false}
-    this.toggleExpand = this.toggleExpand.bind(this)
   }
 
   componentDidUpdate() {
@@ -17,7 +16,7 @@ export default class LogSection extends React.Component {
     obj.scrollTop = obj.scrollHeight
   }
 
-  toggleExpand() {
+  toggleExpand = () => {
     this.setState({expanded: !this.state.expanded})
   }
 
@@ -34,15 +33,25 @@ export default class LogSection extends React.Component {
 
         <div id="log" className="display display-scroll" ref="scroll">
             {this.props.log.length > 0 ? 
-              (this.state.expanded & this.props.log.length > 1 ? rows :
-                <LogRow results={getLastItem(this.props.log)} styleType="solo"/>
+              (this.state.expanded & this.props.log.length > 1 ? 
+                rows : <LogRow results={getLastItem(this.props.log)} styleType="solo"/>
               ) : <p>Empty</p>
             }
         </div>
 
         <div id="buttons">
-          <Button bsStyle="primary" style={{marginRight:20}} onClick={this.toggleExpand}>{this.state.expanded ? "Hide Log" : "Show Log"}</Button>
-          <Button bsStyle="primary" onClick={this.props.clearLog}>Clear Log</Button>
+          <Button
+            bsStyle="primary"
+            style={{marginRight:20}}
+            onClick={this.toggleExpand}
+          >
+            {this.state.expanded ? "Hide Log" : "Show Log"}
+          </Button>
+          <Button 
+            onClick={this.props.clearLog}
+          >
+            Clear Log
+          </Button>
         </div>
       </div>
     )
