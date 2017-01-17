@@ -8,9 +8,10 @@ export default class CoinPage extends React.Component {
   constructor() {
     super()
     this.state = {coin: true}
+    this.flipCoin = this.flipCoin.bind(this)
   }
 
-  flipCoin = () => {
+  flipCoin() {
     this.setState({coin: getRandomInt(0, 1) == 0})
   }
 

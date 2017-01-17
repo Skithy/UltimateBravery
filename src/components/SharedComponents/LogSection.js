@@ -9,6 +9,7 @@ export default class LogSection extends React.Component {
   constructor(props) {
     super(props)
     this.state = {expanded: false}
+    this.toggleExpand = this.toggleExpand.bind(this)
   }
 
   componentDidUpdate() {
@@ -16,7 +17,7 @@ export default class LogSection extends React.Component {
     obj.scrollTop = obj.scrollHeight
   }
 
-  toggleExpand = () => {
+  toggleExpand() {
     this.setState({expanded: !this.state.expanded})
   }
 

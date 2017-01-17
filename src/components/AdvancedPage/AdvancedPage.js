@@ -22,10 +22,16 @@ export default class AdvancedPage extends React.Component {
       log: [],
       searchText: "",
     }
+    this.updateValues = this.updateValues.bind(this)
+    this.generateValues = this.generateValues.bind(this)
+    this.clearValues = this.clearValues.bind(this)
+    this.clearLog = this.clearLog.bind(this)
+    this.updateSearch = this.updateSearch.bind(this)
+    this.validateInput = this.validateInput.bind(this)
   }
 
 
-  updateValues = key => {
+  updateValues(key) {
     return (e) => {
       var values = clone(this.state.values)
       values[key] = e
@@ -39,7 +45,7 @@ export default class AdvancedPage extends React.Component {
     }
   }
 
-  generateValues = () => {
+  generateValues() {
       let allResults = {}
       for (const key in this.state.values) {
         if (key) {
@@ -51,23 +57,23 @@ export default class AdvancedPage extends React.Component {
       })
     }
 
-  clearValues = () => {
+  clearValues() {
     this.setState({
       values: defaultState
     })
   }
 
-  clearLog = () => {
+  clearLog() {
     this.setState({log: []})
   }
 
-  updateSearch = e => {
+  updateSearch(e) {
     const text = e.target.value
     this.setState({searchText: text})
     this.validateInput(text)
   }
 
-  validateInput = text => {
+  validateInput(text) {
     const searchRegExp = /[0-9]{0,2}d[0-9]{1,3}/ig
     const matches = text.match(searchRegExp)
     let values = clone(defaultState)

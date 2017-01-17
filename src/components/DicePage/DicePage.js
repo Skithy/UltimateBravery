@@ -13,14 +13,17 @@ export default class DicePage extends React.Component {
       dice: [1],
       log: []
     }
+    this.updateValues = this.updateValues.bind(this)
+    this.generateValues = this.generateValues.bind(this)
+    this.clearLog = this.clearLog.bind(this)
   }
 
-  updateValues = num => {
+  updateValues(num) {
     const tempArray = createArray(num, () => 1)
     this.setState({dice: tempArray}) 
   }
 
-  generateValues = () => {
+  generateValues() {
     const tempArray = createArray(this.state.dice.length, () => getRandomInt(1, 6))
     let logFormat = {6: tempArray}
     this.setState({
@@ -29,7 +32,7 @@ export default class DicePage extends React.Component {
     })
   }
 
-  clearLog = () => {
+  clearLog() {
     this.setState({log: []})
   }
 
