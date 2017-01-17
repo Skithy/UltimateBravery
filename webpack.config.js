@@ -28,11 +28,8 @@ module.exports = {
       query: {
         cacheDirectory: 'babel_cache',
         presets: debug ? ['react', 'es2015', 'react-hmre'] : ['react', 'es2015'],
-        plugins: ["transform-class-properties"]
       }
-    },
-      { test: /\.less$/, loader: "style!css!less" }
-    ]
+    }]
   },
   plugins: debug ? [] : [
     new webpack.DefinePlugin({
