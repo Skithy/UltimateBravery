@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/lib/Button'
 const DiceSection = ({dice, updateValues, generateValues}) => (
   <div>
     <h1>Dice Roll</h1>
-    <div id="decription" style={{}}>
+    <div id="decription" style={{marginBottom:15}}>
       <p style={{display:"inline-block", marginRight:20}}>Number of dice: </p>
       <NumericInput
           min={1} max={9}

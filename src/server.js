@@ -1,17 +1,19 @@
-'use strict';
+'use strict'
 
-import path from 'path';
-import { Server } from 'http';
-import Express from 'express';
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { match, RouterContext } from 'react-router';
+import path from 'path'
+import { Server } from 'http'
+import Express from 'express'
+import React from 'react'
+import compression from 'compression'
+import { renderToString } from 'react-dom/server'
+import { match, RouterContext } from 'react-router'
 
-import routes from './routes';
-import NotFoundPage from './components/NotFoundPage';
+import routes from './routes'
+import NotFoundPage from './components/NotFoundPage'
 
 // initialize the server and configure support for ejs templates
 const app = new Express();
+app.use(compression())
 const server = new Server(app);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
