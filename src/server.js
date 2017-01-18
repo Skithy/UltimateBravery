@@ -19,7 +19,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // define the folder that will be used for static assets
-app.use(Express.static(path.join(__dirname, 'static')));
+var cacheTime = 86400000*7
+app.use(Express.static(path.join(__dirname, 'static'), { maxAge: cacheTime }));
 
 // universal routing and rendering
 app.get('*', (req, res) => {
