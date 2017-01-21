@@ -40,11 +40,5 @@ export default class CoinSection extends React.Component{
   }
 }
 
-      // <Transition
-      //   timeout={1000}
-      //   enteredClassName='in'
-      //   enteringClassName='in'
-      // >
-
 const diceClass = coin => "coin coin-" + (coin ? "heads" : "tails")
 const diceText = coin => coin ? "HEADS" : "TAILS"
