@@ -9,10 +9,11 @@
   },
   "scripts": {
     "start": "node src/server-compiled.js",
+    "clean": "rm -f src/server-compiled.js",
     "test": "webpack-dev-server --progress --inline --hot",
     "webpack": "node_modules/.bin/webpack -p",
-    "build": "babel src/server.js -o src/server-compiled.js --presets react,es2015",
-    "postinstall": "npm run build"
+    "build": "babel src/server.js -o src/server-compiled.js --presets 'react,es2015'",
+    "postinstall": "npm run clean && npm run build"
   },
   "engines": {
     "node": "6.9.2",
