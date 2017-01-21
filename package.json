@@ -13,7 +13,7 @@
     "webpack": "node_modules/.bin/webpack -p",
     "build": "babel src -d dist",
     "serve": "node dist/server.js",
-    "postinstall": "npm build"
+    "postinstall": "npm run build"
   },
   "engines": {
     "node": "6.9.2",
