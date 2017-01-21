@@ -12,8 +12,8 @@
     "clean": "rm -f build",
     "test": "webpack-dev-server --progress --inline --hot",
     "webpack": "node_modules/.bin/webpack -p",
-    "build": "babel src -d build --presets 'react,es2015'",
-    "postinstall": "npm run clean && npm run build"
+    "build": "babel src -d build --presets 'react,es2015' --copy-files",
+    "postinstall": "npm run clean && npm webpack && npm run build"
   },
   "engines": {
     "node": "6.9.2",
