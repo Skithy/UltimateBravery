@@ -8,7 +8,7 @@
     "url": "git+https://github.com/Skithy/DiceRollOnline.git"
   },
   "scripts": {
-    "start": "node_modules/.bin/babel-node --presets 'react,es2015' src/server.js",
+    "start": "babel-node --presets 'react,es2015' src/server.js",
     "test": "webpack-dev-server --progress --inline --hot",
     "webpack": "node_modules/.bin/webpack -p"
   },
@@ -31,6 +31,7 @@
     "react-router-bootstrap": "^0.23.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.22.2",
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-react-constant-elements": "^6.22.0",
