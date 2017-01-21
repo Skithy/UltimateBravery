@@ -10,7 +10,7 @@
   "scripts": {
     "start": "babel-node src/server.js",
     "test": "webpack-dev-server --progress --inline --hot",
-    "webpack": "node_modules/.bin/webpack -p",
+    "webpack": "node_modules/.bin/webpack -p"
   },
   "engines": {
     "node": "6.9.2",
