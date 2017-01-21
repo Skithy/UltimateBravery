@@ -1,2 +1,2 @@
 # DiceRollOnline
-A simple material-themed React webapp to roll some dice.
+A simple dice-roll website written in React.

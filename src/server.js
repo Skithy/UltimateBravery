@@ -5,6 +5,7 @@ import { Server } from 'http'
 import Express from 'express'
 import React from 'react'
 import compression from 'compression'
+import forceDomain from 'forcedomain'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
 
@@ -12,8 +13,10 @@ import routes from './routes'
 import NotFoundPage from './components/NotFoundPage'
 
 // initialize the server and configure support for ejs templates
-const app = new Express();
+const app = new Express()
 app.use(compression())
+app.use(forceDomain({hostname: 'www.diceroll.online'}))
+
 const server = new Server(app);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
