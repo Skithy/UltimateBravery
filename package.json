@@ -8,9 +8,11 @@
     "url": "git+https://github.com/Skithy/DiceRollOnline.git"
   },
   "scripts": {
-    "start": "babel-node --presets 'react,es2015' src/server.js",
+    "start": "node src/server-compiled.js",
     "test": "webpack-dev-server --progress --inline --hot",
-    "webpack": "node_modules/.bin/webpack -p"
+    "webpack": "node_modules/.bin/webpack -p",
+    "build": "babel src/server.js -w -o src/server-compiled.js --presets 'react,es2015'",
+    "postinstall": "npm run build"
   },
   "engines": {
     "node": "6.9.2",
