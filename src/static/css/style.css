@@ -147,5 +147,7 @@ div.log.log-secondary:first-child {
 }
 
 .mdi {
-  transition: transform 1s;
+  transition: all 1s;  
+  font-size: calc(7vh + 7vw);
+  margin: auto;
 }

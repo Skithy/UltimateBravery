@@ -5,8 +5,8 @@ import NumericInput from 'react-numeric-input'
 import Button from 'react-bootstrap/lib/Button'
 
 export default class DiceSection extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {rotation: 0}
     this.rotate = this.rotate.bind(this)
   }
@@ -36,8 +36,8 @@ export default class DiceSection extends React.Component {
         <div className="display display-dice">
           {this.props.dice.map((value, index) =>
             <span key={index}
-              className={"mdi mdi-dice-" + value}
-              style={{fontSize:"calc(7vh + 7vw)", margin:"auto", transform:"rotate(" + this.state.rotation + "deg)"}}
+              className={"top mdi mdi-dice-" + value}
+              style={{transform:"rotate(" + this.state.rotation + "deg)"}}
             />
           )}
         </div>
