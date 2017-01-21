@@ -28,6 +28,10 @@ module.exports = {
       query: {
         cacheDirectory: 'babel_cache',
         presets: debug ? ['react', 'es2015', 'react-hmre'] : ['react', 'es2015'],
+        plugins: [
+          "transform-react-constant-elements",
+          "transform-react-inline-elements"
+        ]
       }
     }]
   },

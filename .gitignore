@@ -42,3 +42,5 @@ babel_cache
 # Sublime-text
 *.sublime-project
 *.sublime-workspace
+
+dist
