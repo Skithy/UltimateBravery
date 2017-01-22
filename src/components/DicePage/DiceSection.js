@@ -7,15 +7,16 @@ import Button from 'react-bootstrap/lib/Button'
 export default class DiceSection extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {rotation: 0}
-    this.rotate = this.rotate.bind(this)
+    this.state = {animate: true}
+    this.rollDice = this.rollDice.bind(this)
   }
 
-  rotate() {
-    this.setState(
-      {rotation: this.state.rotation + 360},
-      this.props.generateValues
-    )
+  rollDice() {
+    this.setState({animate: false}, () => {
+      this.setState({animate: true}, () =>
+        setTimeout(this.props.generateValues, 400)
+      )
+    })
   }
 
   render() {
@@ -35,15 +36,26 @@ export default class DiceSection extends React.Component {
 
         <div className="display display-dice">
           {this.props.dice.map((value, index) =>
-            <span key={index}
-              className={"top mdi mdi-dice-" + value}
-              style={{transform:"rotate(" + this.state.rotation + "deg)"}}
-            />
+            <div className="dice-container">
+              <span key={index}
+                className={"mdi mdi-dice-" + value}
+              />
+              { this.state.animate ?
+                <span key={index + 10}
+                  className="mdi mdi-dice-1 temp fade"
+                /> : null
+              }
+              { this.state.animate ?
+                <span key={index + 20}
+                  className="mdi mdi-dice-4 temp fade"
+                /> : null
+              }
+            </div>
           )}
         </div>
 
         <div id="buttons">
-          <Button bsStyle="primary" onClick={this.rotate}>Roll Dice</Button>
+          <Button bsStyle="primary" onClick={this.rollDice}>Roll Dice</Button>
         </div>
 
       </div>

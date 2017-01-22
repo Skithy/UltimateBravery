@@ -13,7 +13,7 @@ import Button from 'react-bootstrap/lib/Button'
 const SelectorSection = ({values, updateValues, generateValues, clearValues, searchText, updateSearch, validationState}) => {
   return(
     <div>
-      <h1>Advanced Dice Roll *WIP*</h1>
+      <h1>Advanced Dice Roll (DnD)</h1>
       <form>
         <FormGroup
           controlId="diceForm"
@@ -21,7 +21,7 @@ const SelectorSection = ({values, updateValues, generateValues, clearValues, sea
           <FormControl
             type="text"
             value={searchText}
-            placeholder="Enter dice"
+            placeholder="Enter dice codes... (2d6 3d12)"
             onChange={updateSearch}
           />
          

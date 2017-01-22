@@ -146,8 +146,34 @@ div.log.log-secondary:first-child {
   border-top-right-radius: 4px;
 }
 
-.mdi {
-  transition: all 1s;  
+div.dice-container {
+  width: calc(7vh + 7vw);
+  height: calc(10vh + 10vw);
+  margin: auto;
+}
+
+div.dice-container span {
+  position: absolute;
   font-size: calc(7vh + 7vw);
   margin: auto;
+}
+
+div.dice-container span.temp {
+  opacity: 0;
+}
+
+div.dice-container span.fade {
+  animation-name: fade-animation;
+  animation-duration: 1s;
+}
+
+div.dice-container span.fade2 {
+  animation-name: fade-animation;
+  animation-duration: 1s;
+}
+
+@keyframes fade-animation {
+  0% {opacity: 0;}
+  50% {opacity: 1;}
+  100% {opacity: 0;}
 }
