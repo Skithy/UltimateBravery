@@ -1,6 +1,5 @@
 'use strict'
 
-require("babel-polyfill");
 const express = require('express');
 const compression = require('compression');
 const { resolve } = require('path');
