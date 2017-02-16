@@ -19,7 +19,7 @@ module.exports = {
     publicPath: '/js/'
   },
   context: resolve(__dirname, 'src'),
-  devtool: debug ? 'inline-sourcemap' : [],
+  devtool: debug ? 'inline-sourcemap' : false,
   devServer: {
     hot: true,
     port: 3333,
@@ -50,7 +50,6 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
   ] : [
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
       mangle: true,

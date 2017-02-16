@@ -10,8 +10,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "webpack-dev-server",
-    "postinstall": "npm run webpack",
-    "webpack": "./node_modules/.bin/webpack --config webpack.config.js"
+    "webpack": "./node_modules/.bin/webpack"
   },
   "engines": {
     "node": "6.9.2",
