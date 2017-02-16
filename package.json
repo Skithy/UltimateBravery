@@ -11,9 +11,7 @@
     "start": "node src/server.js",
     "dev": "webpack-dev-server",
     "postinstall": "npm run webpack",
-    "webpack": "node_modules/.bin/webpack -p",
-    "updateDB": "babel-node --presets es2015 src/updateDB.js",
-    "testDB": "babel-node --presets es2015 src/testDB.js"
+    "webpack": "./node_modules/.bin/webpack --config webpack.config.js"
   },
   "engines": {
     "node": "6.9.2",
