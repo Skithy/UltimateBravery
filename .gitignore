@@ -43,4 +43,6 @@ babel_cache
 *.sublime-project
 *.sublime-workspace
 
+#env
+.env
 dist
