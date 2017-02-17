@@ -15,8 +15,6 @@ app.get('*', function(req, res) {
   res.sendFile(resolve(__dirname, 'static', 'index.html'));
 })
 
-
-
 const port = process.env.PORT || 3000;
 app.listen(port, function(err) {
   console.log("Listening on port " + port);

@@ -4,12 +4,16 @@ const debug = process.env.NODE_ENV != 'production';
 
 const { resolve } = require('path');
 const webpack = require('webpack');
+console.log(debug);
 
 module.exports = {
-  entry: [
+  entry: debug ? [
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3333/',
     'webpack/hot/only-dev-server',
+    'whatwg-fetch',
+    resolve(__dirname, 'src', 'app.js')
+  ] : [
     'whatwg-fetch',
     resolve(__dirname, 'src', 'app.js')
   ],
