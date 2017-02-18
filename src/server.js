@@ -21,7 +21,7 @@ var Datastore = require('nedb')
   , adj
 
 fs.readFile(resolve(__dirname, 'data', 'adjectives.txt'), 'utf8', function(err, data){
-  adj = data.split('\r\n')
+  adj = data.split(/\r?\n/)
 })
 
 app.get('/url/:id', function(req, res) {
