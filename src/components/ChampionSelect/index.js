@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-import Datastore from 'nedb'
+import { browserHistory } from 'react-router'
 import Button from 'react-bootstrap/lib/Button'
 import FormControl from 'react-bootstrap/lib/FormControl'
 import FormGroup from 'react-bootstrap/lib/FormGroup'
@@ -9,50 +9,51 @@ import Tooltip from 'react-bootstrap/lib/Tooltip'
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
 
 import {clone, isEmpty} from '../Shared'
-
-let db = {}
-db.urls = new Datastore({filename: '/data/urls.db', autoload: true})
-db.champions = new Datastore({filename: '/data/champions.db', autoload: true})
+import generateRandomBuild from './RandomGenerator'
 
 export default class ChampionSelect extends React.Component {
   state = {
     currentlySelected: new Set(),
-    champions: [],
-    urls: {},
     search: ''
   }
 
-  constructor() {
-    super()
-    db.champions.find({})
-      .sort({name: 1})
-      .exec((err, champions) => this.setState({
-        champions: champions,
-        currentlySelected: new Set(champions.map(champion => champion.key))
-      }))
-    db.urls.findOne({}, (err, doc) => this.setState({urls: doc}))
+  componentWillReceiveProps(nextProps) {
+    if (isEmpty(this.state.currentlySelected) && !isEmpty(nextProps.champions)) {
+      this.setState({ currentlySelected: new Set(Object.keys(nextProps.champions)) })
+    }
   }
 
   selectAll = () => {
-    this.setState({currentlySelected: new Set(this.state.champions.map(champion => champion.key))})
+    this.setState({ currentlySelected: new Set(Object.keys(this.props.champions)) })
   }
 
   selectNone = () => {
-    this.setState({currentlySelected: new Set()})
+    this.setState({ currentlySelected: new Set() })
   }
 
   toggleSelected = (e) => {
-    let list = clone(this.state.currentlySelected)
-    list.has(e) ? list.delete(e) : list.add(e)
-    this.setState({currentlySelected: list})
+    let selected = clone(this.state.currentlySelected)
+    selected.has(e) ? selected.delete(e) : selected.add(e)
+    this.setState({ currentlySelected: selected })
   }
 
   handleChange = (e) => {
-    this.setState({search: e.target.value})
+    this.setState({ search: e.target.value })
   }
 
-  randomizeChamp = (cat) => {
-    console.log("TODO")
+  randomizeChamp = (isUltimate) => {
+    const build = generateRandomBuild(this.state.currentlySelected, this.props, isUltimate)
+    if (build) {
+      fetch('/urls', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          build: build
+        })
+      }).then(res => res.text()).then(body => browserHistory.push('/brave/' + body))
+    }
   }
 
   render() {
@@ -66,7 +67,7 @@ export default class ChampionSelect extends React.Component {
           <Button bsSize='small' onClick={this.selectNone}>Unselect All</Button>
           
           <small style={{'float': 'right', 'margin': 6}}>
-            {this.state.currentlySelected.size + ' of ' + this.state.champions.length + ' selected'}
+            {this.state.currentlySelected.size + ' of ' + Object.keys(this.props.champions).length + ' selected'}
           </small>
 
           <FormGroup>
@@ -78,13 +79,13 @@ export default class ChampionSelect extends React.Component {
             />
           </FormGroup>
 
-          {!isEmpty(this.state.urls) && !isEmpty(this.state.champions) ?
+          {!isEmpty(this.props.urls) && !isEmpty(this.props.champions) ?
             <ChampionsGrid
-              champions={this.state.champions}
+              champions={this.props.champions}
               currentlySelected={this.state.currentlySelected}
               toggleSelected={this.toggleSelected}
               search={this.state.search}
-              urls={this.state.urls}
+              urls={this.props.urls}
             /> : <img src='/img/loader.gif' style={{width:40, display:'block', margin:'auto'}} />
           }
         </div>
@@ -96,13 +97,14 @@ export default class ChampionSelect extends React.Component {
 /* ======================================================================*/
 
 const ChampionsGrid = ({champions, currentlySelected, toggleSelected, search, urls}) => {
+  const championList = Object.keys(champions).sort()
   return (
     <div style={{'display': 'flex', 'flexWrap': 'wrap', 'justifyContent': 'center'}}>
-      {champions.map((champion, i) => 
-        champion.name.toLowerCase().includes(search.toLowerCase()) &&
+      {championList.map((champName, i) => 
+        champName.toLowerCase().includes(search.toLowerCase()) &&
         <ChampionPic
-          champion={champion}
-          selected={currentlySelected.has(champion.key)}
+          champion={champions[champName]}
+          selected={currentlySelected.has(champName)}
           toggleSelected={toggleSelected}
           url={urls.champion}
           key={i}

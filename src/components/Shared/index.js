@@ -46,4 +46,23 @@ const isEmpty = obj => {
   return Object.keys(obj).length == 0
 }
 
-export {clone, isEmpty}
+const shuffle = arr => {
+  var i = 0
+    , j = 0
+    , temp = null
+    , array = clone(arr)
+
+  for (i = array.length - 1; i > 0; i -= 1) {
+    j = Math.floor(Math.random() * (i + 1))
+    temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+  return array
+}
+
+const lastItem = arr => arr[arr.length - 1]
+
+const ranInt = (min,max) => Math.floor(Math.random()*(max-min+1)+min)
+
+export {clone, isEmpty, shuffle, lastItem, ranInt}

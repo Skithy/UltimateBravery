@@ -1,19 +1,13 @@
 "use strict";
 
+require('dotenv').config()
 const debug = process.env.NODE_ENV != 'production';
-
 const { resolve } = require('path');
 const webpack = require('webpack');
-console.log(debug);
+console.log("Debug? " + debug);
 
 module.exports = {
-  entry: debug ? [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3333/',
-    'webpack/hot/only-dev-server',
-    'whatwg-fetch',
-    resolve(__dirname, 'src', 'app.js')
-  ] : [
+  entry: [
     'whatwg-fetch',
     resolve(__dirname, 'src', 'app.js')
   ],
@@ -22,14 +16,21 @@ module.exports = {
     path: resolve(__dirname, 'src', 'static', 'js'),
     publicPath: '/js/'
   },
-  context: resolve(__dirname, 'src'),
   devtool: debug ? 'inline-sourcemap' : false,
   devServer: {
-    hot: true,
     port: 3333,
     contentBase: resolve(__dirname, 'src', 'static'),
     historyApiFallback: true,
-    publicPath: '/js/'
+    proxy: {
+      '/urls': {
+        target: 'http://localhost:3000/',
+        secure: false
+      },
+      '/url': {
+        target: 'http://localhost:3000/',
+        secure: false
+      }
+    }
   },
   module: {
     rules: [
@@ -51,9 +52,14 @@ module.exports = {
     ],
   },
   plugins: debug ? [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
+    new webpack.DefinePlugin({
+      RIOT_API: process.env.RIOT_API
+    })
   ] : [
+    new webpack.DefinePlugin({
+      RIOT_API: JSON.stringify(process.env.RIOT_API)
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
       mangle: true,

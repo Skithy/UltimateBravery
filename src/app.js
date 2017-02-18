@@ -7,16 +7,14 @@ import { AppContainer } from 'react-hot-loader'
 
 import Layout from './components/Layout'
 import Rules from './components/Rules'
+import ChampionSelect from './components/ChampionProfile'
 import ChampionProfile from './components/ChampionProfile'
 import NotFoundPage from './components/NotFound'
 
-import updateDB from './updateDB'
-
-updateDB()
 
 const App = (
   <Router history={browserHistory}>
-    <Route path="/" component={Layout}>
+    <Route path='/' component={Layout}>
       <IndexRoute component={Rules}/>
       <Route path="/rules" component={Rules}/>
       <Route path="/brave/:id" component={ChampionProfile}/>
@@ -26,9 +24,3 @@ const App = (
 )
 
 ReactDOM.render(App, document.getElementById('main'))
-
-if (module.hot) {
-  module.hot.accept('./app', () => {
-    ReactDOM.render(App, document.getElementById('main'))
-  })
-}

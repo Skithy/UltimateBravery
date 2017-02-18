@@ -5,26 +5,33 @@ import { Link } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Nav, NavItem, Navbar, NavDropdown, MenuItem, Grid, Row, Col } from 'react-bootstrap'
 
+import Data from './Data'
 import ChampionSelect from './ChampionSelect'
 
-const Layout = ({children}) => (
+const Layout = props => (
   <div className="app-container">
     <NavbarSection/>
     <div className="home">
-      <Grid>
-        <Row>
-          <Col xs={12} md={8}>
-            <div className="display">
-              {children}
-            </div>
-          </Col>
-          <Col xs={12} md={4}>
-            <ChampionSelect/>
-          </Col>
-        </Row>
-      </Grid>
+      <Data>
+        <PageLayout {...props}/>
+      </Data>
     </div>
   </div>
+)
+
+const PageLayout = props => (
+  <Grid>
+    <Row>
+      <Col xs={12} md={8}>
+        <div className="display">
+          {React.cloneElement(props.children, {...props})}
+        </div>
+      </Col>
+      <Col xs={12} md={4}>
+        <ChampionSelect {...props}/>
+      </Col>
+    </Row>
+  </Grid>
 )
 
 const NavbarSection = () => (
