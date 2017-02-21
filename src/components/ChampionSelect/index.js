@@ -18,7 +18,7 @@ export default class ChampionSelect extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (isEmpty(this.state.currentlySelected) && !isEmpty(nextProps.champions)) {
+    if (isEmpty(this.state.currentlySelected) && nextProps.champions != this.props.champions) {
       this.setState({ currentlySelected: new Set(Object.keys(nextProps.champions)) })
     }
   }
@@ -52,7 +52,12 @@ export default class ChampionSelect extends React.Component {
         body: JSON.stringify({
           build: build
         })
-      }).then(res => res.text()).then(body => browserHistory.push('/brave/' + body))
+      })
+      .then(res => res.text())
+      .then(body => {
+        window.scrollTo(0, 0)
+        browserHistory.push('/brave/' + body)
+      })
     }
   }
 
@@ -101,7 +106,7 @@ const ChampionsGrid = ({champions, currentlySelected, toggleSelected, search, ur
   return (
     <div style={{'display': 'flex', 'flexWrap': 'wrap', 'justifyContent': 'center'}}>
       {championList.map((champName, i) => 
-        champName.toLowerCase().includes(search.toLowerCase()) &&
+        champions[champName].name.toLowerCase().includes(search.toLowerCase()) &&
         <ChampionPic
           champion={champions[champName]}
           selected={currentlySelected.has(champName)}

@@ -36,12 +36,7 @@ export default class Data extends React.Component {
           console.log('Current Version: ' + oldVersion)
           console.log('Server Version: ' + newVersion)
           if (oldVersion != newVersion) {
-            this.updateVersion(newVersion)
-            this.updateUrls(newVersion)
-            this.updateChampions()
-            this.updateItems()
-            this.updateMasteries()
-            this.updateSummoners()
+            this.updateAll(newVersion)
           } else {
             console.log('No updates')
             this.setState(doc)
@@ -76,7 +71,6 @@ export default class Data extends React.Component {
         db.update({}, { $set: {champions: json.data}}, {upsert: true})
         this.setState({champions: json.data}) 
       })
-      .catch(e => console.log('error: ' + e))
   }
 
   updateItems = () => {
@@ -86,7 +80,6 @@ export default class Data extends React.Component {
         db.update({}, { $set: {items: json.data}}, {upsert: true})
         this.setState({items: json.data})
       })
-      .catch(e => console.log('error: ' + e))
   }
 
   updateMasteries = () => {
@@ -96,7 +89,6 @@ export default class Data extends React.Component {
         db.update({}, { $set: {masteries: json}}, {upsert: true})
         this.setState({masteries: json})
       })
-      .catch(e => console.log('error: ' + e))
   }
 
   updateSummoners = () => {
@@ -106,7 +98,20 @@ export default class Data extends React.Component {
         db.update({}, { $set: {summoners: json.data}}, {upsert: true})
         this.setState({summoners: json.data})
       })
-      .catch(e => console.log('error: ' + e))
+  }
+
+  updateAll = (version) => {
+    try {
+      this.updateVersion(version)
+      this.updateUrls(version)
+      this.updateChampions()
+      this.updateItems()
+      this.updateMasteries()
+      this.updateSummoners()
+    }
+    catch (err) {
+      this.updateAll(version)
+    }
   }
 
   render() {

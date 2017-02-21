@@ -65,4 +65,6 @@ const lastItem = arr => arr[arr.length - 1]
 
 const ranInt = (min,max) => Math.floor(Math.random()*(max-min+1)+min)
 
-export {clone, isEmpty, shuffle, lastItem, ranInt}
+const capitalize = (string) => string[0].toUpperCase() + string.slice(1)
+
+export {clone, isEmpty, shuffle, lastItem, ranInt, capitalize}

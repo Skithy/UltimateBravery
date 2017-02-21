@@ -53,7 +53,7 @@ module.exports = {
   },
   plugins: debug ? [
     new webpack.DefinePlugin({
-      RIOT_API: process.env.RIOT_API
+      RIOT_API: JSON.stringify(process.env.RIOT_API)
     })
   ] : [
     new webpack.DefinePlugin({

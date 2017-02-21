@@ -26,8 +26,7 @@ body {
 }
 
 #main {
-  margin-top: 40px;
-  padding: 15px;
+  padding-top: 40px;
 }
 
 .home {
@@ -69,7 +68,123 @@ img.champ-small.disabled {
   filter: grayscale(100%) opacity(50%);
 }
 
-img.champ-large {
-  height: 120px;
-  margin: 3px;
+#champ-large {
+  height: 130px;
+}
+
+#champ-frame {
+  position: relative;
+  width: 162px;
+  left: -16px;
+  top: -146px;
+}
+
+#summoner {
+  display: block;
+  height: 50px;
+  margin-top: 10px;
+  border: #2b3e50 2px solid;
+}
+
+#keystone {
+  display: block;
+  height: 60px;
+  border: #2b3e50 2px solid;
+  margin-left: 10px;
+  margin-top: 35px;
+}
+
+#spell {
+  height: 60px;
+  border: gold 2px solid;
+}
+
+#key-bubble {
+  background: black;
+  height: 30px;
+  width: 30px;
+  border: gold 2px solid;
+  border-radius: 15px;
+  display: flex;
+  position: relative;
+  top: -15px;
+  left: 45px;
+}
+
+#key-bubble h5 {
+  margin: auto;
+  font-weight: 700;
+  color: gold;
+}
+
+#item-grid {
+  margin-top: 20px;
+  margin-left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#spell-max {
+  margin-top: 50px
+}
+
+#url-link {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+@media only screen and (min-width: 663px) {
+  #item-grid {
+    margin-top: 20px;
+  }
+  #spell-max {
+    margin-top: 20px;
+    margin-left: 45px;
+  }
+  #url-link {
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width: 774px) {
+  #url-link {
+    margin-top: 30px;
+  }
+}
+
+
+@media only screen and (min-width: 992px) {
+  #item-grid {
+    margin-top: 45px;
+    height: 100px;
+  }
+  #spell-max {
+    margin-top: 20px;
+    margin-left: 45px;
+  }
+}
+
+#item {
+  height: 60px;
+}
+
+#item-border {
+    border: 2px solid #2b3e50;
+    position: relative;
+    height: 60px;
+    width: 60px;
+    top: -60px;
+}
+
+#title {
+  margin-left: 10px;
+}
+
+#title h1 {
+  margin: 0px 0px 10px 0px;
+  font-size: 45px;
+}
+
+#title h3 {
+  margin: 10px 0px 0px 0px;
 }
