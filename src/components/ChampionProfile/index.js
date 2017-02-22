@@ -85,7 +85,6 @@ export default class ChampionProfile extends React.Component {
           colour: colours[this.state.count % 6],
           count: this.state.count + 1
         })
-
       }
     }
 

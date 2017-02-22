@@ -39,6 +39,10 @@ const AboutUB = ({}) => (
             <p>Money spent on wards is money wasted. You are your own light in the darkness.</p>
             <h4>6. PROVE YOURSELF</h4>
             <p>Reveal your bravery link at the start of the game. Show off your braveness.</p>
+            <h4>(<i>FOR THE EXTRA BRAVE</i>)</h4>
+            <h4>7. NO RECALL</h4>
+            <p>A true warrior never backs, even in death.</p>
+            
           </div>
         </Col>
       </Row>
