@@ -98,7 +98,6 @@ img.champ-small.disabled {
   height: 60px;
   border: gold 2px solid;
 }
-
 #key-bubble {
   background: black;
   height: 30px;
@@ -110,71 +109,74 @@ img.champ-small.disabled {
   top: -15px;
   left: 45px;
 }
-
 #key-bubble h5 {
   margin: auto;
   font-weight: 700;
   color: gold;
 }
+#spell-container {
+  position: relative;
+  top: 50px;
+  left: -20px;
+  height: 75px;
+  width: 75px;
+  margin-bottom: 20px;
+}
 
+#item {
+  height: 60px;
+}
+#item-border {
+    border: 3px solid #2b3e50;
+    position: relative;
+    height: 60px;
+    width: 60px;
+    top: -60px;
+}
+#item-container {
+  height: 60px;
+  margin: 0px 3px 3px 0px;
+}
 #item-grid {
   margin-top: 20px;
   margin-left: 10px;
   display: flex;
   flex-wrap: wrap;
 }
-
-#spell-max {
-  margin-top: 50px
+#item-row {
+  display: flex;
 }
+
 
 #url-link {
   margin-top: 20px;
   margin-left: 10px;
 }
 
-@media only screen and (min-width: 663px) {
-  #item-grid {
-    margin-top: 20px;
-  }
-  #spell-max {
-    margin-top: 20px;
-    margin-left: 45px;
-  }
-  #url-link {
-    margin-top: 0px;
+@media only screen and (min-width: 593px) {
+  #spell-container {
+    top: 20px;
+    left: 0px;
   }
 }
 
-@media only screen and (min-width: 774px) {
+@media only screen and (min-width: 768px) {
+  #spell-container {
+    top: 20px;
+    left: 45px;
+  }
   #url-link {
     margin-top: 30px;
   }
 }
 
-
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1200px) {
   #item-grid {
     margin-top: 45px;
     height: 100px;
   }
-  #spell-max {
-    margin-top: 20px;
-    margin-left: 45px;
-  }
 }
 
-#item {
-  height: 60px;
-}
-
-#item-border {
-    border: 2px solid #2b3e50;
-    position: relative;
-    height: 60px;
-    width: 60px;
-    top: -60px;
-}
 
 #title {
   margin-left: 10px;
@@ -182,9 +184,12 @@ img.champ-small.disabled {
 
 #title h1 {
   margin: 0px 0px 10px 0px;
-  font-size: 45px;
+  font-size: 40px;
+  color: gold;
+  font-family: 'Fugaz One', cursive;
 }
 
 #title h3 {
   margin: 10px 0px 0px 0px;
+  /*font-family: 'Fugaz One', cursive;*/
 }

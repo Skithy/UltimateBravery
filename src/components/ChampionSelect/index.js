@@ -72,7 +72,7 @@ export default class ChampionSelect extends React.Component {
           <Button bsSize='small' onClick={this.selectNone}>Unselect All</Button>
           
           <small style={{'float': 'right', 'margin': 6}}>
-            {this.state.currentlySelected.size + ' of ' + Object.keys(this.props.champions).length + ' selected'}
+            {this.state.currentlySelected.size + '/' + Object.keys(this.props.champions).length + ' selected'}
           </small>
 
           <FormGroup>

@@ -22,6 +22,7 @@
   "dependencies": {
     "body-parser": "^1.16.1",
     "compression": "^1.6.2",
+    "copy-to-clipboard": "^3.0.5",
     "dotenv": "^4.0.0",
     "express": "^4.14.1",
     "nedb": "^1.8.0",
