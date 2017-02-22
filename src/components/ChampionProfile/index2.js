@@ -1,10 +1,8 @@
 'use strict'
 
 import React from 'react'
-import Measure from 'react-measure'
-import fileDownload from 'react-file-download'
 import copy from 'copy-to-clipboard'
-import { Row, Col, Popover , OverlayTrigger, Tooltip, Button, Glyphicon} from 'react-bootstrap'
+import { Row, Col, Popover , OverlayTrigger, FormGroup, InputGroup, FormControl, Button} from 'react-bootstrap'
 
 import {clone, isEmpty, capitalize, getRandom} from '../Shared'
 import NotFound from '../NotFound'
@@ -31,10 +29,6 @@ export default class ChampionProfile extends React.Component {
     items: [],
     colour: '',
     count: 0,
-    dimensions: {
-      width: -1,
-      height: -1
-    }
   }
 
   constructor(props) {
@@ -118,89 +112,56 @@ export default class ChampionProfile extends React.Component {
 
   render() {
     let profile = <img src='/img/loader.gif' style={{width:40, display:'block', margin:'auto'}} />
-    const { width, height } = this.state.dimensions
-    const photoHeight = height < 1000 ? height * (0.6 + 0.4 * (1000 - width) / 1000 ) : height * 0.6
-
+    let spellKeys = ['Q', 'W', 'E', 'R']
     if (!isEmpty(this.state.champion) &&
         !isEmpty(this.state.spell) &&
         !isEmpty(this.state.keystone) &&
         !isEmpty(this.state.summoners) &&
         !isEmpty(this.state.items) &&
         !isEmpty(this.props.urls)) {
-
-      const tooltip = <Tooltip id="tooltip">Download Item Set</Tooltip>
-      const downloadInfo = (
-        <Popover id="popover-trigger-hover-focus" title='Using Item Sets'>
-          <p style={{fontSize:12}}>To use the item set in-game, save the downloaded json file to: </p>
-          <p style={{fontSize:12}}>\League of Legends\Config\Champions\ <b>{this.state.champion.key}</b>\Recommended\</p>
-        </Popover>
-      )
-
       profile = (
         <div>
-          <div style={{height: photoHeight, overflow:'hidden'}}>
-            <Measure onMeasure={(dimensions) => {this.setState({dimensions})}}>
-              <div>
-                <img
-                  src={this.props.urls.splash + this.state.champion.key + '_0.jpg'}
-                  style={{width: '100%'}}
-                />
-              </div>
-            </Measure>
-          </div>
-
-          <Title
-            urlId={this.props.params.id}
-            champion={this.state.champion}
-            colour={this.state.colour}
-          />
-
-          <div id='build-body'>
-            <div style={{margin: 'auto'}}>
-              <h5>Max First</h5>
-              <Pic
-                spell={this.state.spell}
-                spellKey={spellKeys[this.state.spellKey]}
-                urls={this.props.urls}
+          <Row>
+            <Col xs={12} sm={12} md={12} lg={12}>
+              <Title
+                urlId={this.props.params.id}
+                champion={this.state.champion}
+                colour={this.state.colour}
               />
-            </div>
-
-            <div style={{margin: 'auto'}}>
-              <h5>Summoner Spells</h5>
-              <div id='summoners-container'>
-                <Pic
-                  summoner={this.state.summoners[0]}
-                  urls={this.props.urls}
-                />
-                <Pic
-                  summoner={this.state.summoners[1]}
-                  urls={this.props.urls}
-                />
+            </Col>
+          </Row>
+ 
+          <Row>
+            <Col xs={12} sm={6} md={6} lg={5}>
+              <div style={{display:'flex', marginTop:10, marginLeft: 10}}>
+                <div style={{width:140}}>
+                  <Pic {...this.props} champion={this.state.champion} />
+                </div>
+                <div style={{marginLeft: 10}}>
+                  <Pic {...this.props} summoner={this.state.summoners[0]} />
+                  <Pic {...this.props} summoner={this.state.summoners[1]} />
+                </div>
+                <Pic {...this.props} keystone={this.state.keystone} />
               </div>
-            </div>
-
-            <div style={{margin: 'auto'}}>
-              <h5>Keystone</h5>
-              <Pic
-                keystone={this.state.keystone}
-                urls={this.props.urls}
-              />
-            </div>
-
-            <div id='items-container'>
-              <h5 style={{display: 'inline-block', marginRight: 5}}>Item Build</h5>
-              <OverlayTrigger placement="bottom" overlay={tooltip}>
-                <Button bsSize="xsmall"><Glyphicon glyph="download-alt" /></Button>
-              </OverlayTrigger>
-              <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={downloadInfo}>
-                <Button bsSize="xsmall"><Glyphicon glyph="question-sign" /></Button>
-              </OverlayTrigger>
+            </Col>
+            
+            <Col xs={9} sm={6} md={6} lg={7}>
               <Items 
                 items={this.state.items}
                 urls={this.props.urls}
               />
-            </div>
-          </div>
+            </Col>
+            <Col xs={3} sm={3} md={3} lg={3}>
+              <Spell
+                spell={this.state.spell}
+                spellKey={spellKeys[this.state.spellKey]}
+                urls={this.props.urls}
+              />
+            </Col>
+            <Col xs={12} sm={9} md={9} lg={9}>
+              <UrlLink/>
+            </Col>
+          </Row>
         </div>
       )
     }
@@ -218,7 +179,7 @@ const Title = ({urlId, champion, colour}) => {
   return (
     <div id='title'>
       <h3><i>{adjs}</i></h3>
-      <h1>{champion.name.toUpperCase()}</h1>
+      <h1 style={{color: colour}}>{champion.name.toUpperCase()}</h1>
     </div>
   )
 }
@@ -226,14 +187,29 @@ const Title = ({urlId, champion, colour}) => {
 const Items = ({items, urls}) => (
   <div id='item-grid'>
     <div id='item-row'>
-      <Pic item={items[0]} urls={urls}/>
-      <Pic item={items[1]} urls={urls}/>
-      <Pic item={items[2]} urls={urls}/>
+      <Item item={items[0]} urls={urls}/>
+      <Item item={items[1]} urls={urls}/>
+      <Item item={items[2]} urls={urls}/>
     </div>
     <div id='item-row'>
-      <Pic item={items[3]} urls={urls}/>
-      <Pic item={items[4]} urls={urls}/>
-      <Pic item={items[5]} urls={urls}/>
+      <Item item={items[3]} urls={urls}/>
+      <Item item={items[4]} urls={urls}/>
+      <Item item={items[5]} urls={urls}/>
+    </div>
+  </div>
+)
+
+const Item = ({item, urls}) => (
+  <div id='item-container'>
+    <Pic item={item} urls={urls}/>
+  </div>
+)
+
+const Spell = ({spell, spellKey, urls}) => (
+  <div id='spell-container'>
+    <Pic spell={spell} spellKey={spellKey} urls={urls} />
+    <div id='key-bubble'>
+      <h5>{spellKey}</h5>
     </div>
   </div>
 )
@@ -268,14 +244,7 @@ const Pic = props => {
         />
       </Popover>
     )
-    image = (
-      <div id='spell-container'>
-        <img src={props.urls.spell + props.spell.image.full} id='spell' />
-        <div id='key-bubble'>
-          <h5>{props.spellKey}</h5>
-        </div>
-      </div>
-    )
+    image = <img src={props.urls.spell + props.spell.image.full} id='spell' />
   }
 
   else if (props.keystone) {
@@ -312,10 +281,10 @@ const Pic = props => {
       </Popover>
     )
     image = (
-      <div id='item-container'>
+      <div style={{height: 60}}>
         <img src={props.urls.item + props.item.image.full} id='item'/>
         <div id='item-border'/>
-      </div> 
+      </div>
     )
   }
 

@@ -58,6 +58,8 @@ export default class Data extends React.Component {
       spell: baseUrl + 'spell/',
       item: baseUrl + 'item/',
       mastery: baseUrl + 'mastery/',
+      splash: 'http://ddragon.leagueoflegends.com/cdn/img/champion/splash/',
+      loading: 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/',
       version: version
     }
     db.update({}, { $set: {urls: urls}}, {upsert: true})

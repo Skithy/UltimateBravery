@@ -23,9 +23,7 @@ const PageLayout = props => (
   <Grid>
     <Row>
       <Col xs={12} md={8}>
-        <div className="display">
-          {React.cloneElement(props.children, {...props})}
-        </div>
+        {React.cloneElement(props.children, {...props})}
       </Col>
       <Col xs={12} md={4}>
         <ChampionSelect {...props}/>

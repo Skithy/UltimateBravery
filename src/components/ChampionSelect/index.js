@@ -123,7 +123,7 @@ const ChampionsGrid = ({champions, currentlySelected, toggleSelected, search, ur
 const ChampionPic = ({champion, selected, toggleSelected, url}) => {
   const tooltip = <Tooltip id='tooltip'>{champion.name}</Tooltip>
   return (
-    <OverlayTrigger placement='top' overlay={tooltip}>
+    <OverlayTrigger placement='bottom' overlay={tooltip}>
       <img
         src={url + champion.image.full}
         onClick={() => toggleSelected(champion.key)}
