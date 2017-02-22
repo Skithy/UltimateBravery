@@ -4,10 +4,18 @@ import React from 'react'
 import copy from 'copy-to-clipboard'
 import { Row, Col, Popover , OverlayTrigger, FormGroup, InputGroup, FormControl, Button} from 'react-bootstrap'
 
-import {clone, isEmpty, capitalize} from '../Shared'
+import {clone, isEmpty, capitalize, getRandom} from '../Shared'
 import NotFound from '../NotFound'
 
 const spellKeys = ['Q', 'W', 'E', 'R']
+const colours = [
+  '#ff1414', //red
+  'orange',
+  'gold',
+  'lawngreen',
+  'deepskyblue',
+  '#e359ff' //purple
+]
 
 export default class ChampionProfile extends React.Component {
   state = {
@@ -18,20 +26,16 @@ export default class ChampionProfile extends React.Component {
     spellKey: 0,
     keystone: {},
     summoners: [],
-    items: []
+    items: [],
+    colour: '',
+    count: 0,
   }
 
   constructor(props) {
     super(props)
     fetch('/url/' + this.props.params.id)
       .then(res => res.json())
-      .then(json => {
-        if (!isEmpty(json)) {
-          this.setState({data: json.build, err: false})
-        } else {
-          this.setState({err: true})
-        }
-      })
+      .then(json => !isEmpty(json) ? this.setState({data: json.build, err: false}) : this.setState({err: true}))
       .catch(e => console.log(e))
   }
 
@@ -49,7 +53,9 @@ export default class ChampionProfile extends React.Component {
         this.setState({
           champion: champion,
           spell: champion.spells[this.state.data[1]],
-          spellKey: this.state.data[1]
+          spellKey: this.state.data[1],
+          colour: colours[this.state.count % 6],
+          count: this.state.count + 1
         })
       }
 
@@ -75,8 +81,11 @@ export default class ChampionProfile extends React.Component {
         this.setState({
           champion: champion,
           spell: champion.spells[this.state.data[1]],
-          spellKey: this.state.data[1]
+          spellKey: this.state.data[1],
+          colour: colours[this.state.count % 6],
+          count: this.state.count + 1
         })
+
       }
     }
 
@@ -118,6 +127,7 @@ export default class ChampionProfile extends React.Component {
               <Title
                 urlId={this.props.params.id}
                 champion={this.state.champion}
+                colour={this.state.colour}
               />
             </Col>
           </Row>
@@ -165,12 +175,12 @@ export default class ChampionProfile extends React.Component {
   }
 }
 
-const Title = ({urlId, champion}) => {
+const Title = ({urlId, champion, colour}) => {
   const adjs = urlId.split(/(?=[A-Z])/, 2).join(" ")
   return (
     <div id='title'>
       <h3><i>{adjs}</i></h3>
-      <h1>{champion.name.toUpperCase()}</h1>
+      <h1 style={{color: colour}}>{champion.name.toUpperCase()}</h1>
     </div>
   )
 }
@@ -190,9 +200,9 @@ const Items = ({items, urls}) => (
   </div>
 )
 
-const Item = props => (
+const Item = ({item, urls}) => (
   <div id='item-container'>
-    <Pic {...props}/>
+    <Pic item={item} urls={urls}/>
   </div>
 )
 

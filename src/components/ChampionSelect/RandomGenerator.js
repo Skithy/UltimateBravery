@@ -1,4 +1,4 @@
-import {shuffle, lastItem, ranInt} from '../Shared'
+import {shuffle, lastItem, randInt, getRandom} from '../Shared'
 
 // build = [name, qwer, ksId, 2 * ssId, 6 * itemId]
 
@@ -13,7 +13,7 @@ const generateRandomBuild = (currentlySelected, data, isUltimate) => {
 
   let arr = []
   arr.push(randomChamp)
-  arr.push(randomChamp == 'Udyr' ? ranInt(0, 3) : ranInt(0, 2))
+  arr.push(randomChamp == 'Udyr' ? randInt(0, 3) : randInt(0, 2))
   arr.push(build.keystone.id)
   arr = arr.concat(build.summoners.map(summoner => summoner.id))
   arr = arr.concat(build.items.map(item => item.id))
@@ -79,6 +79,5 @@ const getKeystone = (masteries) => {
   return masteries.data[keyStoneId]
 }
 
-const getRandom = (arr) => arr[Math.floor(Math.random()*arr.length)]
 
 export default generateRandomBuild
