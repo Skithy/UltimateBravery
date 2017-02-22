@@ -7,9 +7,10 @@ import { AppContainer } from 'react-hot-loader'
 
 import Layout from './components/Layout'
 import Rules from './components/Rules'
+import About from './components/About'
 import ChampionSelect from './components/ChampionProfile'
 import ChampionProfile from './components/ChampionProfile'
-import NotFoundPage from './components/NotFound'
+import NotFound from './components/NotFound'
 
 
 const App = (
@@ -18,7 +19,8 @@ const App = (
       <IndexRoute component={Rules}/>
       <Route path="/rules" component={Rules}/>
       <Route path="/brave/:id" component={ChampionProfile}/>
-      <Route path="*" component={NotFoundPage}/>
+      <Route path='/about' component={About}/>
+      <Route path="*" component={NotFound}/>
     </Route>
   </Router>
 )
