@@ -31,7 +31,7 @@ export default class Data extends React.Component {
       fetch(versionUrl)
         .then(res => res.json())
         .then(json => {
-          //oldVersion = doc ? doc.version : null
+          oldVersion = doc ? doc.version : null
           newVersion = json.dd
           console.log('Current Version: ' + oldVersion)
           console.log('Server Version: ' + newVersion)

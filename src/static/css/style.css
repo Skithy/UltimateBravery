@@ -151,6 +151,10 @@ img.champ-small.disabled {
   margin: auto;
   margin-top: 10px;
 }
+#items-container h5 {
+  display: inline-block;
+  margin-right: 5px;
+}
 
 @media only screen and (min-width: 450px) {
   #item-grid {
@@ -182,9 +186,15 @@ img.champ-small.disabled {
   }
 }
 
-#url-link {
-  margin-top: 20px;
-  margin-left: 10px;
+#url-container {
+  display: flex;
+  margin: 0px 10px;
+}
+#url-container h5 {
+  margin: auto 15px auto 10px;
+}
+#url-container .form-group {
+  margin-bottom: 0px;
 }
 
 #title {
@@ -201,6 +211,7 @@ img.champ-small.disabled {
 }
 #title h3 {
   margin: 0px 0px 0px 0px;
+  font-style: italic;
 }
 
 #build-body {
@@ -213,8 +224,10 @@ img.champ-small.disabled {
   margin-bottom: -67px;
 }
 #fade-divider { 
-    margin: 25px 0;
-    height: 1px;
-    background: white;
-    background: -webkit-gradient(linear, 0 0, 100% 0, from(#485563), to(#485563), color-stop(50%, white));
+    margin: 20px 10px;
+    height: 2px;
+    width: 100%;
+    background-color: #2b3e50;
+    /*background: -webkit-gradient(linear, 0 0, 100% 0, from(#485563), to(#485563), color-stop(50%, #2b3e50));*/
+
 }
