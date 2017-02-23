@@ -58,7 +58,7 @@ const getItems = (champion, summoners, items, options, isUltimate) => {
       itemBuild.push(getRandom(boots))
     }
 
-    if (summoners.map(summoner => summoner.name).includes('Smite')) {
+    if (summoners.map(summoner => summoner.name).includes('Smite') && options.jungle) {
       itemBuild.push(getRandom(jungleItems))
     }
 

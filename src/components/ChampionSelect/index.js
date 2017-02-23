@@ -27,6 +27,7 @@ export default class ChampionSelect extends React.Component {
     options: {
       duplicates: true,
       boots: true,
+      jungle: true,
     }
   }
 
@@ -239,6 +240,11 @@ const Options = ({options, toggleOptions}) => {
           style={options.boots ? {backgroundColor: '#2b3e50'} : null}
           onClick={() => toggleOptions('boots')}
           >Boots First
+        </Label>
+        <Label
+          style={options.jungle ? {backgroundColor: '#2b3e50'} : null}
+          onClick={() => toggleOptions('jungle')}
+          >Jungle Item
         </Label>
       </div>
     </div>
