@@ -191,7 +191,6 @@ img.champ-small.disabled {
   width: 100%;
   position: relative;
   top: -87px;
-  height: 0px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px 0px 5px 10px;
 }
@@ -210,8 +209,8 @@ img.champ-small.disabled {
   padding: 10px 10px 20px 10px;
   display: flex;
   flex-wrap: wrap;
-  top: -15px;
-  margin-bottom: 5px;
+  top: -87px;
+  margin-bottom: -67px;
 }
 #fade-divider { 
     margin: 25px 0;
