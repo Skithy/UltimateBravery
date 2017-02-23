@@ -46,3 +46,5 @@ babel_cache
 #env
 .env
 dist
+
+urls.db
