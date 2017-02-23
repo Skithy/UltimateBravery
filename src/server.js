@@ -28,7 +28,7 @@ fs.readFile(resolve(__dirname, 'data', 'adjectives.txt'), 'utf8', function(err, 
 
 var uristring = 
   process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL ||
+  process.env.MONGODB_URI ||
   'mongodb://localhost/UltimateBraveryDb';
 
 var urlSchema = new mongoose.Schema({ url: String, build: Array })
