@@ -47,7 +47,7 @@ export default class ChampionProfile extends React.Component {
     if (prevProps.params.id != this.props.params.id) {
       fetch('/url/' + this.props.params.id)
         .then(res => res.json())
-        .then(json => this.setState({data: json.build}))
+        .then(json => !isEmpty(json) ? this.setState({data: json.build, err: false}) : this.setState({err: true}))
         .catch(e => console.log(e))
     }
 
