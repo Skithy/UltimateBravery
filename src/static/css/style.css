@@ -191,6 +191,7 @@ img.champ-small.disabled {
   width: 100%;
   position: relative;
   top: -87px;
+  height: 0px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px 0px 5px 10px;
 }
@@ -206,7 +207,6 @@ img.champ-small.disabled {
 #build-body {
   background-color: #4e5d6c;
   position: relative;
-  top: -87px;
   padding: 10px 10px 20px 10px;
   display: flex;
   flex-wrap: wrap;

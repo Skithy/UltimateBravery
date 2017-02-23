@@ -3,7 +3,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import { AppContainer } from 'react-hot-loader'
 
 import Layout from './components/Layout'
 import Rules from './components/Rules'
