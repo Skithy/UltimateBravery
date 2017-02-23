@@ -1,10 +1,13 @@
 'use strict'
 
 const express = require('express');
+const mongoose = require ("mongoose");
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const { resolve } = require('path');
 const fs = require('fs');
+
+/* SETUP */
 
 const app = new express();
 app.use(compression());
@@ -16,39 +19,62 @@ const cacheTime = 0
 app.use(express.static(resolve(__dirname, 'static'), { maxAge: cacheTime }));
 app.use(express.static(resolve(__dirname, 'data'), { maxAge: cacheTime }));
 
-var Datastore = require('nedb')
-  , db = new Datastore({ filename: resolve(__dirname, 'data', 'urls.db'), autoload:true})
-  , adj
+/* DATA */
 
+var adj;
 fs.readFile(resolve(__dirname, 'data', 'adjectives.txt'), 'utf8', function(err, data){
   adj = data.split(/\r?\n/)
 })
 
+var uristring = 
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/UltimateBraveryDb';
+
+var urlSchema = new mongoose.Schema({ url: String, build: Array })
+var Url = mongoose.model('Url', urlSchema)
+
+
 app.get('/url/:id', function(req, res) {
-  db.findOne({url: req.params.id}, function(err, doc) {
-    if (doc) {
-      res.send(JSON.stringify({build: doc.build}))
+  Url.findOne({url: req.params.id}, function (err, doc) {
+    if (!err) {
+      if (doc) {
+        res.send(JSON.stringify({build: doc.build}))
+      } else {
+        res.send({})
+      }
     } else {
-      res.send(JSON.stringify({}))
+      console.log('Error: ' + err)
+      res.send({})
     }
   })
 })
 
+
 app.post('/urls', function(req, res) {
-  db.findOne({build: req.body.build}, function(err, doc) {
-    if (doc) {
-      res.send(doc.url)
+  Url.findOne({build: req.body.build}, function(err, doc) {
+    if (!err) {
+      console.log(req.body.build)
+      if (doc) {
+        console.log(doc.url)
+      } else {
+        var url = generateRandomUrl(req.body.build[0])
+        var urlbuild = new Url({url: url, build: req.body.build})
+        urlbuild.save(function (err) {if (err) console.log ('Error on save!')})
+        res.send(url)
+      }
     } else {
-      var url = generateUrl(req.body.build[0])
-      db.update({url: url}, {url: url, build: req.body.build}, {upsert: true})
-      res.send(url)
+      console.log('Error: ' + err)
+      res.send('')
     }
   })
 })
+
 
 app.get('*', function(req, res) {
   res.sendFile(resolve(__dirname, 'static', 'index.html'));
 })
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, function(err) {
@@ -58,13 +84,24 @@ app.listen(port, function(err) {
   }
 })
 
-function addToDb(data) {
-  var url = generateUrl(data[0])
-  db.findOne({url: url}, function(err, doc) {
-    if (doc) {
-      url = addToDb(data)
+mongoose.connect(uristring, function (err, res) {
+  if (err) {
+  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+  console.log ('Succeeded connected to: ' + uristring);
+  }
+});
+
+function generateRandomUrl(name) {
+  var url = generateUrl(name)
+  Url.findOne({url: url}, function (err, doc) {
+    if (!err) {
+      if (doc) {
+        url = generateRandomUrl(name)
+      }
     } else {
-      db.insert({url: url, build: data})
+      console.log('Error: ' + err)
+      return null
     }
   })
   return url

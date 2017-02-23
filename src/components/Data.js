@@ -5,7 +5,7 @@ import Datastore from 'nedb'
 
 const apiKey = RIOT_API || 'RIOT_API'
 const baseUrl = 'https://global.api.pvp.net/api/lol/static-data/oce/v1.2'
-  , champsUrl = baseUrl + '/champion?champData=image,passive,spells,stats&api_key=' + apiKey
+  , champsUrl = baseUrl + '/champion?champData=image,passive,spells,stats,tags&api_key=' + apiKey
   , itemsUrl = baseUrl + '/item?itemListData=all&api_key=' + apiKey
   , masteriesUrl = baseUrl + '/mastery?masteryListData=image,tree,sanitizedDescription&api_key=' + apiKey
   , summonersUrl = baseUrl + '/summoner-spell?spellData=image,modes&api_key=' + apiKey
@@ -31,7 +31,7 @@ export default class Data extends React.Component {
       fetch(versionUrl)
         .then(res => res.json())
         .then(json => {
-          oldVersion = doc ? doc.version : null
+          //oldVersion = doc ? doc.version : null
           newVersion = json.dd
           console.log('Current Version: ' + oldVersion)
           console.log('Server Version: ' + newVersion)

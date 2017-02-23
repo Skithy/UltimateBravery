@@ -53,10 +53,12 @@ body {
 
 .omega {
   text-shadow: -1px 0 #df691a, 0 1px #df691a, 1px 0 #df691a, 0 -1px #df691a;
+  font-family: 'Fugaz One', cursive;
 }
 
 .ultimate {
   text-shadow: -1px 0 #5cb85c, 0 1px #5cb85c, 1px 0 #5cb85c, 0 -1px #5cb85c;
+  font-family: 'Fugaz One', cursive;
 }
 
 img.champ-small {
@@ -114,18 +116,6 @@ img.champ-small.disabled {
   height: 60px;
   width: 60px;
 }
-
-/*#key-bubble {
-  background: black;
-  height: 30px;
-  width: 30px;
-  border: gold 2px solid;
-  border-radius: 15px;
-  display: flex;
-  position: relative;
-  top: -15px;
-  left: 45px;
-}*/
 
 #item {
   height: 60px;
@@ -223,11 +213,20 @@ img.champ-small.disabled {
   top: -87px;
   margin-bottom: -67px;
 }
+
+#options-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+#options-container span{
+  margin-right: 5px;
+  margin-bottom: 5px;
+  cursor: pointer; 
+}
+
 #fade-divider { 
     margin: 20px 10px;
     height: 2px;
     width: 100%;
     background-color: #2b3e50;
-    /*background: -webkit-gradient(linear, 0 0, 100% 0, from(#485563), to(#485563), color-stop(50%, #2b3e50));*/
-
 }

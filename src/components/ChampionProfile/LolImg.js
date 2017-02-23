@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-import { Popover, OverlayTrigger} from 'react-bootstrap'
+import { Popover, OverlayTrigger } from 'react-bootstrap'
 
 const LolImg = props => {
   let info, image
@@ -67,6 +67,10 @@ const LolImg = props => {
         <div id='item-border'/>
       </div> 
     )
+  }
+
+  else {
+    return null
   }
 
   return (

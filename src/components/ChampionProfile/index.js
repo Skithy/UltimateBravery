@@ -5,10 +5,10 @@ import Measure from 'react-measure'
 import fileDownload from 'react-file-download'
 import copy from 'copy-to-clipboard'
 import { Row, Col, Popover, OverlayTrigger, Tooltip, Button, Glyphicon, FormControl, FormGroup, InputGroup} from 'react-bootstrap'
+import { clone, isEmpty, capitalize, getRandom } from '../Shared'
 
 import LolImg from './LolImg'
 import NotFound from '../NotFound'
-import {clone, isEmpty, capitalize, getRandom} from '../Shared'
 
 const spellKeys = ['Q', 'W', 'E', 'R']
 
